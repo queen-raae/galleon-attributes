@@ -9,6 +9,17 @@
   </head>
   <body>
     <main>
+      <!-- Get user data from the server -->
+      <div data-gl-get="me.json">
+        <h1 data-gl-bind="name">Name</h1>
+        <p data-gl-bind="bio">Bio</p>
+        <!-- Cloned for every item in links -->
+        <!-- textContent set to the label of each item and href is set to url of each item  -->
+        <a data-gl-bind="socials.label" data-gl-bind-href="socials.url">
+          Social Link
+        </a>
+      </div>
+
       <!-- Cloned for every project in list -->
       <div data-gl-get="/projects.json">
         <!-- textContent set to title -->
@@ -29,25 +40,15 @@
 
         <!-- Cloned for every item in links -->
         <!-- textContent set to the value of each item -->
-        <a data-gl-bind="links.label" data-gl-bind-href="links.href" href="#"
-          >Project Link</a
-        >
+        <a data-gl-bind="links.label" data-gl-bind-href="links.href" href="#">
+          Project Link
+        </a>
       </div>
 
       <!-- Get message from the server -->
       <ul>
         <li data-gl-get="/messages.json">Message</li>
       </ul>
-
-      <!-- Get user data from the server -->
-      <div data-gl-get="me.json">
-        <h1 data-gl-bind="name">Name</h1>
-        <!-- Cloned for every item in links -->
-        <!-- textContent set to the value of each item -->
-        <a data-gl-bind="socials.label" data-gl-bind-href="socials.href"
-          >Social Link</a
-        >
-      </div>
     </main>
   </body>
 </html>

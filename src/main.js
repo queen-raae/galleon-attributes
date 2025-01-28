@@ -92,14 +92,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const clone = container.cloneNode(true);
         clone.removeAttribute("data-gl-get");
         bindData(clone, item);
-        parent.appendChild(clone);
+        parent.insertBefore(clone, container);
       });
       container.remove(); // Remove the original template container
     } else if (typeof data === "object") {
       bindData(container, data);
-    } else {
-      // For simple text (e.g., /message)
-      container.textContent = data;
     }
   }
 
@@ -129,20 +126,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const isArray = Array.isArray(getValue(data, key));
         if (isArray) {
           // Handle array binding by cloning the element for each array item
-          const parent = child.parentElement;
           const template = child.cloneNode(true);
-          parent.innerHTML = ""; // Clear existing content
-          getValue(data, key).forEach((item, index) => {
+          const arrayData = getValue(data, key);
+
+          // Insert clones before the template
+          arrayData.forEach((item) => {
             const clone = template.cloneNode(true);
-            // For arrays of objects (e.g., links, socials)
             if (typeof item === "object") {
               bindElement(clone, item);
             } else {
-              // For arrays of primitives (e.g., tags)
               clone.textContent = item;
             }
-            parent.appendChild(clone);
+            // Insert before the template element
+            child.before(clone);
           });
+
+          // Remove the template element
+          child.remove();
         } else {
           // Single binding
           bindElement(child, data);
