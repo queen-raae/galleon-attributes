@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <main>
+      <!-- Cloned for every project in list -->
+      <div data-gl-get="/projects.json">
+        <!-- textContent set to title -->
+        <h1 data-gl-bind="title">Title</h1>
+        <!-- textContent set to description -->
+        <p data-gl-bind="description">Description</p>
+
+        <!-- src set to image.url -->
+        <img width="200" height="200" data-gl-bind-src="image.url" />
+
+        <ul>
+          <!-- Cloned for every item in tags -->
+          <!-- textContent set to the value of each item -->
+          <li data-gl-bind="tags">TAG</li>
+        </ul>
+        <!-- textContent of span set to value of the second tag -->
+        <p>Tag number two: <span data-gl-bind="tags[1]">TAG1</span></p>
+
+        <!-- Cloned for every item in links -->
+        <!-- textContent set to the value of each item -->
+        <a data-gl-bind="links.label" data-gl-bind-href="links.href" href="#"
+          >Project Link</a
+        >
+      </div>
+
+      <!-- Get message from the server -->
+      <ul>
+        <li data-gl-get="/messages.json">Message</li>
+      </ul>
+
+      <!-- Get user data from the server -->
+      <div data-gl-get="me.json">
+        <h1 data-gl-bind="name">Name</h1>
+        <!-- Cloned for every item in links -->
+        <!-- textContent set to the value of each item -->
+        <a data-gl-bind="socials.label" data-gl-bind-href="socials.href"
+          >Social Link</a
+        >
+      </div>
+    </main>
+  </body>
+</html>

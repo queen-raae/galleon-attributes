@@ -1,0 +1,7 @@
+{
+  "name": "Queen Raae",
+  "socials": [
+    { "url": "http://test.com", "label": "Test" },
+    { "url": "http://test1.com", "label": "Test1" }
+  ]
+}
