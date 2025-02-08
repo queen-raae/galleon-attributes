@@ -9,19 +9,12 @@
   </head>
   <body>
     <nav>
-      <a href="/xano.html">Xano Demo</a>
+      <a href="/index.html">JSON Demo</a>
     </nav>
 
     <main>
-      <!-- Get gallery data from server -->
-      <h1>Gallery</h1>
-      <div data-gl-get="/gallery.json">
-        <img height="300" data-gl-bind-src="path" />
-        <p data-gl-bind="attribution"></p>
-      </div>
-
       <!-- Get user data from the server -->
-      <div data-gl-get="/me.json">
+      <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/me">
         <h1 data-gl-bind="name">Name</h1>
         <p data-gl-bind="bio">Bio</p>
         <h3>Socials data-gl-each</h3>
@@ -35,7 +28,7 @@
       </div>
 
       <!-- Cloned for every project in list -->
-      <div data-gl-get="/projects.json">
+      <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/project">
         <!-- textContent set to title -->
         <h1 data-gl-bind="title">Title</h1>
         <!-- textContent set to description -->
@@ -53,8 +46,7 @@
         <p>Tag number two: <span data-gl-bind="tags[1]">TAG1</span></p>
 
         <!-- Cloned for every item in links -->
-        <!-- textContent set to the label value of each item -->
-        <!-- href set to the href value of each item -->
+        <!-- textContent set to the value of each item -->
         <a
           data-gl-use="links"
           data-gl-bind="label"
