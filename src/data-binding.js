@@ -1,4 +1,4 @@
-import { getValue } from "./api.js";
+import { getValue, fetchData } from "./api.js";
 
 export function bindElement(element, data, log) {
   log.debug("Binding element:", { element, data });
@@ -116,4 +116,22 @@ export function bindData(element, data, log) {
   });
 
   log.debug("Completed data binding for element");
+}
+
+export async function initializeDataBinding(log) {
+  const getElements = document.querySelectorAll("[data-gl-get]");
+  log.info(`Found ${getElements.length} elements with data-gl-get`);
+
+  for (const element of getElements) {
+    const endpoint = element.getAttribute("data-gl-get");
+    log.debug(`Processing element with endpoint: ${endpoint}`);
+
+    const data = await fetchData(endpoint, log);
+    if (data) {
+      log.debug(`Processing container with data:`, data);
+      processContainer(element, data, log);
+    } else {
+      log.warn(`No data received for endpoint: ${endpoint}`);
+    }
+  }
 }
