@@ -52,25 +52,34 @@ export function bindElement(element, data, log) {
   });
 }
 
-export function processContainer(container, data, log) {
-  log.info("Processing container:", { container, data });
+function processTemplateElement(element, data, path, log) {
+  log.debug(`Processing template element with path: "${path}"`, {
+    element,
+    data,
+  });
 
-  if (Array.isArray(data)) {
-    log.debug(`Processing array data with ${data.length} items`);
-    const parent = container.parentElement;
-    data.forEach((item, index) => {
-      log.debug(`Cloning container for array item ${index}`);
-      const clone = container.cloneNode(true);
-      clone.removeAttribute("data-gl-get");
-      bindData(clone, item, log);
-      parent.insertBefore(clone, container);
-    });
-    container.style.display = "none"; // Hide the template instead of removing it
-    log.debug("Hidden original template container");
-  } else if (typeof data === "object") {
-    log.debug("Processing single object data");
-    bindData(container, data, log);
+  const arrayData = path ? getValue(data, path, log) : data;
+  const targetData = Array.isArray(arrayData) ? arrayData : [data];
+
+  if (!targetData || (path && !arrayData)) {
+    log.warn(`Invalid data for path: ${path}`, arrayData);
+    return;
   }
+
+  const parent = element.parentElement;
+  targetData.forEach((item, index) => {
+    log.debug(`Cloning element for item ${index}`);
+    const clone = element.cloneNode(true);
+    // Remove both attributes to ensure clean clones
+    clone.removeAttribute("data-gl-get");
+    clone.removeAttribute("data-gl-select");
+    bindData(clone, item, log);
+    parent.insertBefore(clone, element);
+  });
+
+  // Hide the template instead of removing it
+  element.style.display = "none";
+  log.debug("Hidden original template element");
 }
 
 export function bindData(element, data, log) {
@@ -78,34 +87,14 @@ export function bindData(element, data, log) {
 
   bindElement(element, data, log);
 
-  // Process data-gl-select elements first
-  const useElements = Array.from(element.querySelectorAll("[data-gl-select]"));
-  useElements.forEach((useElement) => {
-    const usePath = useElement.getAttribute("data-gl-select");
-    const arrayData = getValue(data, usePath, log);
-
-    if (Array.isArray(arrayData)) {
-      log.debug(
-        `Processing array data for ${usePath} with ${arrayData.length} items`
-      );
-      const parent = useElement.parentElement;
-      arrayData.forEach((item, index) => {
-        log.debug(`Cloning element for array item ${index}`);
-        const clone = useElement.cloneNode(true);
-        clone.removeAttribute("data-gl-select");
-        useElement.removeAttribute("data-gl-select");
-        bindData(clone, item, log);
-        parent.insertBefore(clone, useElement);
-      });
-      useElement.style.display = "none"; // Hide the template instead of removing it
-      log.debug(`Hidden original template for ${usePath}`);
-    } else if (typeof arrayData === "object" && arrayData !== null) {
-      log.debug(`Processing object data for ${usePath}`);
-      useElement.removeAttribute("data-gl-select");
-      bindData(useElement, arrayData, log);
-    } else {
-      log.warn(`Invalid data for ${usePath}:`, arrayData);
-    }
+  // Process all template elements (both data-gl-get and data-gl-select)
+  const templateElements = Array.from(
+    element.querySelectorAll("[data-gl-select], [data-gl-get]")
+  );
+  templateElements.forEach((templateElement) => {
+    // data-gl-get is essentially data-gl-select with an empty path
+    const path = templateElement.getAttribute("data-gl-select") || "";
+    processTemplateElement(templateElement, data, path, log);
   });
 
   // Then process remaining bindable elements
@@ -140,7 +129,7 @@ export async function initializeDataBinding(log) {
     const data = await fetchData(endpoint, log);
     if (data) {
       log.debug(`Processing container with data:`, data);
-      processContainer(element, data, log);
+      processTemplateElement(element, data, "", log);
     } else {
       log.warn(`No data received for endpoint: ${endpoint}`);
     }
