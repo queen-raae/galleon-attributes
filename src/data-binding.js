@@ -19,16 +19,16 @@ export function bindElement(element, data, log) {
 
   log.debug("Binding element:", { element, data });
 
-  // Get all attributes that start with 'data-gl-bind' or 'data-gl-bind-*'
+  // Get all attributes that start with 'gl-bind' or 'gl-bind-*'
   const attributes = Array.from(element.attributes);
   const bindingAttributes = attributes.filter((attr) =>
-    attr.name.startsWith("data-gl-bind")
+    attr.name.startsWith("gl-bind")
   );
 
   bindingAttributes.forEach((attr) => {
     const bindPath = attr.value;
-    let bindType = attr.name.replace("data-gl-bind-", "");
-    if (bindType === "data-gl-bind") {
+    let bindType = attr.name.replace("gl-bind-", "");
+    if (bindType === "gl-bind") {
       bindType = SPECIAL_BINDINGS.TEXT; // Default to text binding
     }
 
@@ -71,8 +71,8 @@ function processTemplateElement(element, data, path, log) {
     log.debug(`Cloning element for item ${index}`);
     const clone = element.cloneNode(true);
     // Remove both attributes to ensure clean clones
-    clone.removeAttribute("data-gl-get");
-    clone.removeAttribute("data-gl-select");
+    clone.removeAttribute("gl-get");
+    clone.removeAttribute("gl-select");
     bindData(clone, item, log);
     parent.insertBefore(clone, element);
   });
@@ -87,22 +87,20 @@ export function bindData(element, data, log) {
 
   bindElement(element, data, log);
 
-  // Process all template elements (both data-gl-get and data-gl-select)
+  // Process all template elements (both gl-get and gl-select)
   const templateElements = Array.from(
-    element.querySelectorAll("[data-gl-select], [data-gl-get]")
+    element.querySelectorAll("[gl-select], [gl-get]")
   );
   templateElements.forEach((templateElement) => {
-    // data-gl-get is essentially data-gl-select with an empty path
-    const path = templateElement.getAttribute("data-gl-select") || "";
+    // gl-get is essentially gl-select with an empty path
+    const path = templateElement.getAttribute("gl-select") || "";
     processTemplateElement(templateElement, data, path, log);
   });
 
   // Then process remaining bindable elements
   const bindableElements = Array.from(element.querySelectorAll("*")).filter(
     (el) =>
-      Array.from(el.attributes).some((attr) =>
-        attr.name.startsWith("data-gl-bind")
-      )
+      Array.from(el.attributes).some((attr) => attr.name.startsWith("gl-bind"))
   );
 
   log.debug(`Found ${bindableElements.length} bindable child elements`);
@@ -119,11 +117,11 @@ export function bindData(element, data, log) {
 }
 
 export async function initializeDataBinding(log) {
-  const getElements = document.querySelectorAll("[data-gl-get]");
-  log.info(`Found ${getElements.length} elements with data-gl-get`);
+  const getElements = document.querySelectorAll("[gl-get]");
+  log.info(`Found ${getElements.length} elements with gl-get`);
 
   for (const element of getElements) {
-    const endpoint = element.getAttribute("data-gl-get");
+    const endpoint = element.getAttribute("gl-get");
     log.debug(`Processing element with endpoint: ${endpoint}`);
 
     const data = await fetchData(endpoint, log);

@@ -9,33 +9,30 @@
 
     <main>
       <!-- Cloned for every project in list -->
-      <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/project">
+      <div gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/project">
         <!-- textContent set to title -->
-        <h1 data-gl-bind="title">Title</h1>
+        <h1 gl-bind="title">Title</h1>
         <!-- textContent set to description -->
-        <p data-gl-bind="description">Description</p>
+        <p gl-bind="description">Description</p>
 
         <!-- src set to image.url -->
-        <img width="200" height="200" data-gl-bind-src="image.url" />
+        <img width="200" height="200" gl-bind-src="image.url" />
 
         <ul>
           <!-- Cloned for every item in tags -->
           <!-- textContent set to the value of each item -->
-          <li data-gl-bind="tags">TAG</li>
+          <li gl-bind="tags">TAG</li>
         </ul>
         <!-- textContent of span set to value of the second tag -->
-        <p>Tag number two: <span data-gl-bind="tags[1]">TAG1</span></p>
+        <p>Tag number two: <span gl-bind="tags[1]">TAG1</span></p>
 
         <!-- Cloned for every item in links -->
         <!-- textContent set to the value of each item -->
-        <a
-          data-gl-select="links"
-          data-gl-bind="label"
-          data-gl-bind-href="href"
-          href="#"
-        >
-          Project Link
-        </a>
+        <ul>
+          <li gl-select="links">
+            <a gl-bind="label" gl-bind-href="href" href="#">Project Link</a>
+          </li>
+        </ul>
       </div>
     </main>
   </body>

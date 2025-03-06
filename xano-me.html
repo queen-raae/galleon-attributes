@@ -9,15 +9,15 @@
 
     <main>
       <!-- Get user data from the server -->
-      <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/me">
-        <h1 data-gl-bind="name">Name</h1>
-        <p data-gl-bind="bio">Bio</p>
-        <h3>Socials data-gl-each</h3>
+      <div gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/me">
+        <h1 gl-bind="name">Name</h1>
+        <p gl-bind="bio">Bio</p>
+        <h3>Socials gl-each</h3>
         <ul>
           <!-- Cloned for every item in links -->
           <!-- textContent set to the label of each item and href is set to url of each item  -->
-          <li data-gl-select="socials">
-            <a data-gl-bind="label" data-gl-bind-href="url"> Social Link </a>
+          <li gl-select="socials">
+            <a gl-bind="label" gl-bind-href="url"> Social Link </a>
           </li>
         </ul>
       </div>
