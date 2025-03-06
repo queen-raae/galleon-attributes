@@ -1,37 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <script type="module" src="/src/main.js"></script>
-    <style>
-      a + a {
-        margin-left: 0.5rem;
-      }
-    </style>
+    <load src="templates/head.html" />
+    <title>Xano Projects</title>
   </head>
   <body>
-    <nav>
-      <a href="/index.html">JSON Demo</a>
-    </nav>
+    <load src="templates/navbar.html" />
 
     <main>
-      <!-- Get user data from the server -->
-      <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/me">
-        <h1 data-gl-bind="name">Name</h1>
-        <p data-gl-bind="bio">Bio</p>
-        <h3>Socials data-gl-each</h3>
-        <ul>
-          <!-- Cloned for every item in links -->
-          <!-- textContent set to the label of each item and href is set to url of each item  -->
-          <li data-gl-select="socials">
-            <a data-gl-bind="label" data-gl-bind-href="url"> Social Link </a>
-          </li>
-        </ul>
-      </div>
-
       <!-- Cloned for every project in list -->
       <div data-gl-get="https://x8ki-letl-twmt.n7.xano.io/api:XF3zg5T_/project">
         <!-- textContent set to title -->
