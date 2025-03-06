@@ -65,8 +65,8 @@ export function processContainer(container, data, log) {
       bindData(clone, item, log);
       parent.insertBefore(clone, container);
     });
-    container.remove();
-    log.debug("Removed original template container");
+    container.style.display = "none"; // Hide the template instead of removing it
+    log.debug("Hidden original template container");
   } else if (typeof data === "object") {
     log.debug("Processing single object data");
     bindData(container, data, log);
@@ -97,8 +97,8 @@ export function bindData(element, data, log) {
         bindData(clone, item, log);
         parent.insertBefore(clone, useElement);
       });
-      useElement.remove();
-      log.debug(`Removed original template for ${usePath}`);
+      useElement.style.display = "none"; // Hide the template instead of removing it
+      log.debug(`Hidden original template for ${usePath}`);
     } else if (typeof arrayData === "object" && arrayData !== null) {
       log.debug(`Processing object data for ${usePath}`);
       useElement.removeAttribute("data-gl-select");
