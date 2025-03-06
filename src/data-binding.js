@@ -78,10 +78,10 @@ export function bindData(element, data, log) {
 
   bindElement(element, data, log);
 
-  // Process data-gl-use elements first
-  const useElements = Array.from(element.querySelectorAll("[data-gl-use]"));
+  // Process data-gl-select elements first
+  const useElements = Array.from(element.querySelectorAll("[data-gl-select]"));
   useElements.forEach((useElement) => {
-    const usePath = useElement.getAttribute("data-gl-use");
+    const usePath = useElement.getAttribute("data-gl-select");
     const arrayData = getValue(data, usePath, log);
 
     if (Array.isArray(arrayData)) {
@@ -92,7 +92,8 @@ export function bindData(element, data, log) {
       arrayData.forEach((item, index) => {
         log.debug(`Cloning element for array item ${index}`);
         const clone = useElement.cloneNode(true);
-        clone.removeAttribute("data-gl-use");
+        clone.removeAttribute("data-gl-select");
+        useElement.removeAttribute("data-gl-select");
         bindData(clone, item, log);
         parent.insertBefore(clone, useElement);
       });
@@ -100,7 +101,7 @@ export function bindData(element, data, log) {
       log.debug(`Removed original template for ${usePath}`);
     } else if (typeof arrayData === "object" && arrayData !== null) {
       log.debug(`Processing object data for ${usePath}`);
-      useElement.removeAttribute("data-gl-use");
+      useElement.removeAttribute("data-gl-select");
       bindData(useElement, arrayData, log);
     } else {
       log.warn(`Invalid data for ${usePath}:`, arrayData);
