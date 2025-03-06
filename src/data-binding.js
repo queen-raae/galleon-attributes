@@ -70,9 +70,19 @@ function processTemplateElement(element, data, path, log) {
   targetData.forEach((item, index) => {
     log.debug(`Cloning element for item ${index}`);
     const clone = element.cloneNode(true);
+
+    // Get both gl-get and gl-select values
+    const getPath = element.closest("[gl-get]")?.getAttribute("gl-get") || "";
+    const selectPath = element.getAttribute("gl-select") || "";
+    // Combine them into a path-like string
+    const clonePath = selectPath ? `${getPath} > ${selectPath}` : getPath;
+
     // Remove both attributes to ensure clean clones
     clone.removeAttribute("gl-get");
     clone.removeAttribute("gl-select");
+    // Add clone identification attributes
+    clone.setAttribute("gl-clone", clonePath);
+    clone.setAttribute("gl-clone-index", index);
     bindData(clone, item, log);
     parent.insertBefore(clone, element);
   });
