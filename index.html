@@ -9,6 +9,11 @@
       window.GL_LOG_LEVEL = "INFO";
     </script>
     <script type="module" src="/src/main.js"></script>
+    <style>
+      a + a {
+        margin-left: 0.5rem;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -20,19 +25,19 @@
       <h1>Gallery</h1>
       <div data-gl-get="/gallery.json">
         <img height="300" data-gl-bind-src="path" />
-        <p data-gl-bind="attribution"></p>
+        <p data-gl-bind-html="attribution"></p>
       </div>
 
       <!-- Get user data from the server -->
       <div data-gl-get="/me.json">
         <h1 data-gl-bind="name">Name</h1>
         <p data-gl-bind="bio">Bio</p>
-        <h3>Socials data-gl-each</h3>
+        <h3>Socials</h3>
         <ul>
           <!-- Cloned for every item in links -->
           <!-- textContent set to the label of each item and href is set to url of each item  -->
           <li data-gl-use="socials">
-            <a data-gl-bind="label" data-gl-bind-href="url"> Social Link </a>
+            <a data-gl-bind="label" data-gl-bind-href="url">Social Link</a>
           </li>
         </ul>
       </div>
@@ -47,6 +52,7 @@
         <!-- src set to image.url -->
         <img width="200" height="200" data-gl-bind-src="image.url" />
 
+        <h2>Tags</h2>
         <ul>
           <!-- Cloned for every item in tags -->
           <!-- textContent set to the value of each item -->
@@ -55,17 +61,20 @@
         <!-- textContent of span set to value of the second tag -->
         <p>Tag number two: <span data-gl-bind="tags[1]">TAG1</span></p>
 
+        <h3>Project Links</h3>
+        <p>As simple a elements:</p>
         <!-- Cloned for every item in links -->
         <!-- textContent set to the label value of each item -->
         <!-- href set to the href value of each item -->
-        <a
-          data-gl-use="links"
-          data-gl-bind="label"
-          data-gl-bind-href="href"
-          href="#"
-        >
+        <a data-gl-use="links" data-gl-bind="label" data-gl-bind-href="url">
           Project Link
         </a>
+        <p>As a list item:</p>
+        <ul>
+          <li data-gl-use="links">
+            <a data-gl-bind="label" data-gl-bind-href="url">Project Link</a>
+          </li>
+        </ul>
       </div>
     </main>
   </body>

@@ -1,37 +1,55 @@
 import { getValue, fetchData } from "./api.js";
 
+// Special bindings that aren't attributes
+const SPECIAL_BINDINGS = {
+  TEXT: "text",
+  HTML: "html",
+  VALUE: "value",
+};
+
+// Handler functions for special bindings
+const SPECIAL_BINDING_HANDLERS = {
+  [SPECIAL_BINDINGS.TEXT]: (element, value) => (element.textContent = value),
+  [SPECIAL_BINDINGS.HTML]: (element, value) => (element.innerHTML = value),
+  [SPECIAL_BINDINGS.VALUE]: (element, value) => (element.value = value),
+};
+
 export function bindElement(element, data, log) {
+  if (!element || !data) return;
+
   log.debug("Binding element:", { element, data });
 
-  // Bind text content
-  const bindText = element.getAttribute("data-gl-bind");
-  if (bindText) {
-    const value = getValue(data, bindText, log);
-    if (value !== undefined) {
-      log.debug(`Binding text content: "${bindText}" = "${value}"`);
-      element.textContent = value;
-    }
-  }
+  // Get all attributes that start with 'data-gl-bind' or 'data-gl-bind-*'
+  const attributes = Array.from(element.attributes);
+  const bindingAttributes = attributes.filter((attr) =>
+    attr.name.startsWith("data-gl-bind")
+  );
 
-  // Bind image src
-  const bindSrc = element.getAttribute("data-gl-bind-src");
-  if (bindSrc) {
-    const value = getValue(data, bindSrc, log);
-    if (value !== undefined) {
-      log.debug(`Binding src attribute: "${bindSrc}" = "${value}"`);
-      element.src = value;
+  bindingAttributes.forEach((attr) => {
+    const bindPath = attr.value;
+    let bindType = attr.name.replace("data-gl-bind-", "");
+    if (bindType === "data-gl-bind") {
+      bindType = SPECIAL_BINDINGS.TEXT; // Default to text binding
     }
-  }
 
-  // Bind href for links
-  const bindHref = element.getAttribute("data-gl-bind-href");
-  if (bindHref) {
-    const value = getValue(data, bindHref, log);
-    if (value !== undefined) {
-      log.debug(`Binding href attribute: "${bindHref}" = "${value}"`);
-      element.href = value;
+    const value = getValue(data, bindPath, log);
+    if (value === undefined) {
+      log.debug(`No value found for path: ${bindPath}`);
+      return;
     }
-  }
+
+    try {
+      if (bindType in SPECIAL_BINDING_HANDLERS) {
+        log.debug(`Binding: ${bindType} = "${value}"`);
+        SPECIAL_BINDING_HANDLERS[bindType](element, value);
+      } else {
+        log.debug(`Binding attribute: ${bindType} = "${value}"`);
+        element.setAttribute(bindType, value);
+      }
+    } catch (error) {
+      log.error(`Error binding ${bindType}:`, error);
+    }
+  });
 }
 
 export function processContainer(container, data, log) {
@@ -60,8 +78,41 @@ export function bindData(element, data, log) {
 
   bindElement(element, data, log);
 
-  const bindableElements = element.querySelectorAll(
-    "[data-gl-bind], [data-gl-bind-src], [data-gl-bind-href]"
+  // Process data-gl-use elements first
+  const useElements = Array.from(element.querySelectorAll("[data-gl-use]"));
+  useElements.forEach((useElement) => {
+    const usePath = useElement.getAttribute("data-gl-use");
+    const arrayData = getValue(data, usePath, log);
+
+    if (Array.isArray(arrayData)) {
+      log.debug(
+        `Processing array data for ${usePath} with ${arrayData.length} items`
+      );
+      const parent = useElement.parentElement;
+      arrayData.forEach((item, index) => {
+        log.debug(`Cloning element for array item ${index}`);
+        const clone = useElement.cloneNode(true);
+        clone.removeAttribute("data-gl-use");
+        bindData(clone, item, log);
+        parent.insertBefore(clone, useElement);
+      });
+      useElement.remove();
+      log.debug(`Removed original template for ${usePath}`);
+    } else if (typeof arrayData === "object" && arrayData !== null) {
+      log.debug(`Processing object data for ${usePath}`);
+      useElement.removeAttribute("data-gl-use");
+      bindData(useElement, arrayData, log);
+    } else {
+      log.warn(`Invalid data for ${usePath}:`, arrayData);
+    }
+  });
+
+  // Then process remaining bindable elements
+  const bindableElements = Array.from(element.querySelectorAll("*")).filter(
+    (el) =>
+      Array.from(el.attributes).some((attr) =>
+        attr.name.startsWith("data-gl-bind")
+      )
   );
 
   log.debug(`Found ${bindableElements.length} bindable child elements`);
@@ -71,48 +122,7 @@ export function bindData(element, data, log) {
       `Processing child element ${index + 1}/${bindableElements.length}`
     );
 
-    const bindPath =
-      child.getAttribute("data-gl-bind") ||
-      child.getAttribute("data-gl-bind-src") ||
-      child.getAttribute("data-gl-bind-href");
-
-    const arrayMatch = bindPath.match(/^(\w+)(\[\d+\])?$/);
-    if (arrayMatch) {
-      const key = arrayMatch[1];
-      const value = getValue(data, key, log);
-      const isArray = Array.isArray(value);
-
-      if (isArray) {
-        log.debug(
-          `Processing array binding for "${key}" with ${value.length} items`
-        );
-        const template = child.cloneNode(true);
-        const arrayData = value;
-
-        arrayData.forEach((item, idx) => {
-          log.debug(
-            `Creating clone ${idx + 1}/${arrayData.length} for array item`
-          );
-          const clone = template.cloneNode(true);
-          if (typeof item === "object") {
-            bindElement(clone, item, log);
-          } else {
-            log.debug(`Setting text content for array item: "${item}"`);
-            clone.textContent = item;
-          }
-          child.before(clone);
-        });
-
-        log.debug("Removing original template element");
-        child.remove();
-      } else {
-        log.debug(`Processing single value binding for "${bindPath}"`);
-        bindElement(child, data, log);
-      }
-    } else {
-      log.debug(`Processing nested path binding for "${bindPath}"`);
-      bindElement(child, data, log);
-    }
+    bindElement(child, data, log);
   });
 
   log.debug("Completed data binding for element");

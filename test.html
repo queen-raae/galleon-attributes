@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script>
+      window.GL_LOG_LEVEL = "DEBUG";
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="/xano.html">Xano Demo</a>
+    </nav>
+
+    <main>
+      <!-- Get gallery data from server -->
+      <h1>Gallery</h1>
+      <div data-gl-get="/gallery.json">
+        <img height="300" data-gl-bind-src="path" />
+        <p data-gl-bind="attribution"></p>
+        <p data-gl-bind-html="attribution"></p>
+      </div>
+    </main>
+  </body>
+</html>
