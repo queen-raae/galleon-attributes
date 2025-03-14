@@ -39,7 +39,7 @@ export default {
     [
       "@semantic-release/git",
       {
-        assets: ["plugin/package.json", "CHANGELOG.md"],
+        assets: ["package.json", "CHANGELOG.md"],
       },
     ],
     "@semantic-release/github",
