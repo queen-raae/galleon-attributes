@@ -28,7 +28,7 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 
 ### Use the Galleon Attributes
 
-Start by using using out test APIs to get the hang of it.
+Start by using our test APIs to get the hang of it.
 
 1. Select an element
 
