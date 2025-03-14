@@ -1,11 +1,14 @@
 {
-  "name": "galleon-attributes",
-  "private": true,
+  "name": "@raae/galleon-attributes",
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://galleon.tools",
   "author": "Queen Raae <queen@raae.codes> (http://queen.raae.codes)",
   "repository": "github:queen-raae/galleon-attributes",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

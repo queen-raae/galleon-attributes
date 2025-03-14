@@ -17,7 +17,12 @@ export default {
         releaseRules: [
           {
             type: "docs",
-            scope: "README",
+            scope: "readme",
+            release: "patch",
+          },
+          {
+            type: "chore",
+            scope: "release",
             release: "patch",
           },
         ],
