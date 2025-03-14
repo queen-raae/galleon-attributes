@@ -19,6 +19,7 @@
     "@semantic-release/commit-analyzer": "^11.1.0",
     "@semantic-release/release-notes-generator": "^12.1.0",
     "semantic-release": "^24.2.3",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "vite-plugin-html-inject": "^1.1.2"
   }
 }
