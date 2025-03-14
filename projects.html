@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <load src="templates/head.html" />
+    <title>Projects</title>
+  </head>
+  <body>
+    <load src="templates/navbar.html" />
+
+    <main>
+      <!-- Cloned for every project in list -->
+      <div gl-get="/projects.json">
+        <!-- textContent set to title -->
+        <h1 gl-bind="title">Title</h1>
+        <!-- textContent set to description -->
+        <p gl-bind="description">Description</p>
+
+        <!-- src set to image.url -->
+        <img width="200" height="200" gl-bind-src="image.url" />
+
+        <h2>Tags</h2>
+        <ul>
+          <!-- Cloned for every item in tags -->
+          <!-- textContent set to the value of each item -->
+          <li gl-bind="tags">TAG</li>
+        </ul>
+        <!-- textContent of span set to value of the second tag -->
+        <p>Tag number two: <span gl-bind="tags[1]">TAG1</span></p>
+
+        <h3>Project Links</h3>
+        <p>As simple a elements:</p>
+        <!-- Cloned for every item in links -->
+        <!-- textContent set to the label value of each item -->
+        <!-- href set to the href value of each item -->
+        <a gl-select="links" gl-bind="label" gl-bind-href="url">
+          Project Link
+        </a>
+        <p>As a list item:</p>
+        <ul>
+          <li gl-select="links">
+            <a gl-bind="label" gl-bind-href="url">Project Link</a>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <load src="templates/head.html" />
+    <title>Gallery</title>
+  </head>
+  <body>
+    <load src="templates/navbar.html" />
+
+    <main>
+      <!-- Get gallery data from server -->
+      <h1>Gallery</h1>
+      <div gl-get="/gallery.json">
+        <img height="300" gl-bind-src="path" />
+        <p gl-bind="attribution"></p>
+        <p gl-bind-html="attribution"></p>
+      </div>
+    </main>
+  </body>
+</html>
