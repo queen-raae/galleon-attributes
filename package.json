@@ -1,14 +1,24 @@
 {
-  "name": "data-gl-gateway",
+  "name": "galleon-attributes",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://galleon.tools",
+  "author": "Queen Raae <queen@raae.codes> (http://queen.raae.codes)",
+  "repository": "github:queen-raae/galleon-attributes",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "semantic-release": "^24.2.3",
     "vite": "^6.0.5"
   }
 }
