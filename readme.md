@@ -2,6 +2,8 @@
 
 A simple yet powerful tool for Webflow Pirates to create dynamic content using data attributes.
 
+🚧 Galleon Attributes is currently in beta. 🚧
+
 ## Ahoy there! Welcome aboard! 🏴‍☠️
 
 Galleon Attributes helps you create dynamic, data-driven websites without sailing into the treacherous waters of complex code. Made for Webflow, but works with any tool that supports data attributes.
@@ -22,7 +24,7 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ```html
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@latest/dist/script.js"
+  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@beta/dist/script.js"
 ></script>
 ```
 
@@ -32,7 +34,7 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@latest/dist/queen.json`.\
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@beta/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
 
 2. Select a _multiline text_ child of the container element
