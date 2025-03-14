@@ -32,38 +32,31 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   Add the attribute `gl-get` with the value `https://cdn.jsdelivr.net/npm/raae/galleon-attributes@latest/dist/queen.json`.
-
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/raae/galleon-attributes@latest/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
 
-2. Select a _multiple text lines_ child of the container element
+2. Select a _multiline text_ child of the container element
 
-   Add the attribute `gl-bind` with the value `bio`.
-
+   ➕ Add attribute `gl-bind` with value `bio`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
 
 3. Select an _image_ child of the container element
 
-   Add the attribute `gl-bind-src` with the value `avatar.url`.
-
+   ➕ Add attribute `gl-bind-src` with value `avatar.url`.\
    💡 It will bind the `src` attribute of the element to the `avatar.url` property of the data.
 
-   Add the attribute `gl-bind-alt` with the value `avatar.alt`.
-
+   ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
    💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
 
 4. Select a _link_ child of the container element
 
-   Add the attribute `gl-select` with the value `socials`.
-
+   ➕ Add attribute `gl-select` with value `socials`.\
    💡 It will select the `socials` property of the data and create a copy of the element for each item.
 
-   Add the attribute `gl-bind-href` with the value `url`.
-
+   ➕ Add attribute `gl-bind-href` with value `url`.\
    💡 It will bind the `href` attribute of the element to the `url` property of the `socials` item data.
 
-   Add the attribute `gl-bind` with the value `label`.
-
+   ➕ Add attribute `gl-bind` with value `label`.\
    💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
 
 ## Treasure Map (User Guide)
