@@ -6,6 +6,7 @@ export default {
     "placeholder-until-out-of-prerelease",
     {
       name: "main",
+      channel: "beta",
       prerelease: true,
     },
   ],
