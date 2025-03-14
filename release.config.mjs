@@ -3,10 +3,9 @@
  */
 export default {
   branches: [
-    "placeholder-until-out-of-prerelease",
+    "main",
     {
-      name: "main",
-      channel: "beta",
+      name: "beta",
       prerelease: true,
     },
   ],
