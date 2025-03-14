@@ -6,7 +6,7 @@ export default {
     "main",
     {
       name: "beta",
-      prerelease: true,
+      channel: "latest",
     },
   ],
   plugins: [
