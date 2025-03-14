@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - beta # only on beta for now
+      - main # only on main for now
 
 permissions:
   contents: read # for checkout
