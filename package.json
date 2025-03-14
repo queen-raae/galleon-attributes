@@ -6,6 +6,9 @@
   "homepage": "https://galleon.tools",
   "author": "Queen Raae <queen@raae.codes> (http://queen.raae.codes)",
   "repository": "github:queen-raae/galleon-attributes",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
