@@ -26,7 +26,7 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ></script>
 ```
 
-### Use the Galleon Attributes
+### Test Galleon Attributes
 
 Start by using our test APIs to get the hang of it.
 
