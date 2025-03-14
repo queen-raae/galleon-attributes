@@ -4,7 +4,7 @@ A simple yet powerful tool for Webflow Pirates to create dynamic content using d
 
 ## Ahoy there! Welcome aboard! 🏴‍☠️
 
-Galleon Attributes helps you harness the power of data attributes to create dynamic, data-driven websites without sailing into the treacherous waters of complex code. Made for Webflow, but works with any tool that supports data attributes.
+Galleon Attributes helps you create dynamic, data-driven websites without sailing into the treacherous waters of complex code. Made for Webflow, but works with any tool that supports data attributes.
 
 ## The Treasure This Tool Provides 💎
 
