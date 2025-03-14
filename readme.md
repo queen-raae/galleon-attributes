@@ -30,31 +30,34 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 
 Start by using our test APIs to get the hang of it.
 
-1. Select an element
+1. Select a container element to hold the data
 
-   - Add the attribute `gl-get` and set the value to `https://cdn.jsdelivr.net/npm/raae/galleon-attributes@latest/dist/queen.json`.
-   - It will fetch the data from the url and make it available to the element and its childrens.
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/raae/galleon-attributes@latest/dist/queen.json`.\
+   💡 It will fetch the data from the url and make it available to the element and its childrens.
 
-2. Select a _multiple text lines_ child of the element
+2. Select a _multiline text_ child of the container element
 
-   - Add attribute `gl-bind` and set the value to `bio`
-     - It will bind the text content of the element to the `bio` property of the data.
+   ➕ Add attribute `gl-bind` with value `bio`.\
+   💡 It will bind the text content of the element to the `bio` property of the data.
 
-3. Select an _image_ child of the element
+3. Select an _image_ child of the container element
 
-   - Add attribute `gl-bind-src` and set the value to `avatar.url`
-     - It will bind the `src` attribute of the element to the `avatar.url` property of the data.
-   - Add attribute `gl-bind-alt` and set the value to `avatar.alt`
-     - It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
+   ➕ Add attribute `gl-bind-src` with value `avatar.url`.\
+   💡 It will bind the `src` attribute of the element to the `avatar.url` property of the data.
 
-4. Select a _link_ child of the element
+   ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
+   💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
 
-   - Add attribute `gl-select` and set the value to `socials`
-     - It will select the `socials` property of the data and create a copy of the element for each item.
-   - Add attribute `gl-bind-href` and set the value to `url`
-     - It will bind the `href` attribute of the element to the `url` property of the `socials` item data.
-   - Add attribute `gl-bind` and set the value to `label`
-     - It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
+4. Select a _link_ child of the container element
+
+   ➕ Add attribute `gl-select` with value `socials`.\
+   💡 It will select the `socials` property of the data and create a copy of the element for each item.
+
+   ➕ Add attribute `gl-bind-href` with value `url`.\
+   💡 It will bind the `href` attribute of the element to the `url` property of the `socials` item data.
+
+   ➕ Add attribute `gl-bind` with value `label`.\
+   💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
 
 ## Treasure Map (User Guide)
 
