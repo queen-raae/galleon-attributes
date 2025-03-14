@@ -1,3 +1,5 @@
+# [1.0.0-beta.2](https://github.com/queen-raae/galleon-attributes/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2025-03-14)
+
 # 1.0.0-beta.1 (2025-03-14)
 
 
