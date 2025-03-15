@@ -71,15 +71,16 @@ function processTemplateElement(element, data, path, log) {
     log.debug(`Cloning element for item ${index}`);
     const clone = element.cloneNode(true);
 
-    // Get both gl-get and gl-select values
+    // Get the gl-get path if it exists
     const getPath = element.closest("[gl-get]")?.getAttribute("gl-get") || "";
-    const selectPath = element.getAttribute("gl-select") || "";
+    // Get the iterate path
+    const iteratePath = element.getAttribute("gl-iterate") || "";
     // Combine them into a path-like string
-    const clonePath = selectPath ? `${getPath} > ${selectPath}` : getPath;
+    const clonePath = iteratePath ? `${getPath} > ${iteratePath}` : getPath;
 
     // Remove both attributes to ensure clean clones
     clone.removeAttribute("gl-get");
-    clone.removeAttribute("gl-select");
+    clone.removeAttribute("gl-iterate");
     // Add clone identification attributes
     clone.setAttribute("gl-clone", clonePath);
     clone.setAttribute("gl-clone-index", index);
@@ -97,13 +98,13 @@ export function bindData(element, data, log) {
 
   bindElement(element, data, log);
 
-  // Process all template elements (both gl-get and gl-select)
+  // Process all template elements (both gl-get and gl-iterate)
   const templateElements = Array.from(
-    element.querySelectorAll("[gl-select], [gl-get]")
+    element.querySelectorAll("[gl-iterate], [gl-get]")
   );
   templateElements.forEach((templateElement) => {
-    // gl-get is essentially gl-select with an empty path
-    const path = templateElement.getAttribute("gl-select") || "";
+    // If the element has gl-iterate, use that path, otherwise empty path
+    const path = templateElement.getAttribute("gl-iterate") || "";
     processTemplateElement(templateElement, data, path, log);
   });
 
