@@ -6,6 +6,7 @@ export default {
     "main",
     {
       name: "feat/*",
+      channel: "${name.replace('/', '-').toLowerCase()}",
       prerelease: "${name.replace('/', '-').toLowerCase()}",
     },
   ],
