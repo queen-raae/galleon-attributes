@@ -8,40 +8,50 @@
     <load src="templates/navbar.html" />
 
     <main>
-      <!-- Cloned for every project in list -->
-      <div gl-get="/projects.json">
-        <!-- textContent set to title -->
+      <!-- Get projects data from server -->
+      <!-- Iterate over the projects root array and clone the `article` for each project -->
+      <article gl-get="/projects.json" gl-iterate>
+        <!-- Set `textContent` to the project's `title` -->
         <h1 gl-bind="title">Title</h1>
-        <!-- textContent set to description -->
+        <!-- Set `textContent` to the project's `description` -->
         <p gl-bind="description">Description</p>
 
-        <!-- src set to image.url -->
-        <img width="200" height="200" gl-bind-src="image.url" />
+        <!-- Set the `src` to the project's `image.url` -->
+        <!-- Set the `alt` to the project's `image.alt` -->
+        <img
+          width="200"
+          height="200"
+          gl-bind-src="image.url"
+          gl-bind-alt="image.alt"
+        />
 
         <h2>Tags</h2>
         <ul>
-          <!-- Cloned for every item in tags -->
-          <!-- textContent set to the value of each item -->
-          <li gl-bind="tags">TAG</li>
+          <!-- Iterate over the `tags` array and clone the `li` for each tag -->
+          <!-- Set `textContent` to the tag's value -->
+          <li gl-iterate="tags" gl-bind>TAG</li>
         </ul>
-        <!-- textContent of span set to value of the second tag -->
+        <!-- Set `textContent` to the value of the second tag's value -->
         <p>Tag number two: <span gl-bind="tags[1]">TAG1</span></p>
 
         <h3>Project Links</h3>
         <p>As simple a elements:</p>
-        <!-- Cloned for every item in links -->
-        <!-- textContent set to the label value of each item -->
-        <!-- href set to the href value of each item -->
-        <a gl-select="links" gl-bind="label" gl-bind-href="url">
+        <!-- Iterate over the `links` array and clone the `a` for each link -->
+        <!-- Set `textContent` to the link's `label`-->
+        <!-- Set `href` to the link's `url` -->
+        <a gl-iterate="links" gl-bind="label" gl-bind-href="url">
           Project Link
         </a>
         <p>As a list item:</p>
         <ul>
-          <li gl-select="links">
+          <!-- Iterate over the `links` array and clone the `li` for each link -->
+          <li gl-iterate="links">
+            <!-- Set `textContent` to the link's `label` -->
+            <!-- Set `href` to the link's `url` -->
             <a gl-bind="label" gl-bind-href="url">Project Link</a>
           </li>
         </ul>
-      </div>
+      </article>
     </main>
   </body>
 </html>

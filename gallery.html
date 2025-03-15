@@ -8,13 +8,19 @@
     <load src="templates/navbar.html" />
 
     <main>
-      <!-- Get gallery data from server -->
       <h1>Gallery</h1>
-      <div gl-get="/gallery.json">
-        <img height="300" gl-bind-src="path" />
-        <p gl-bind="attribution"></p>
-        <p gl-bind-html="attribution"></p>
-      </div>
+      <!-- Get gallery data from server -->
+      <section gl-get="/gallery.json">
+        <!-- Iterate over the gallery root array and clone the `div` for each item -->
+        <div gl-iterate>
+          <!-- Set the `src` to the item's `path`-->
+          <img height="300" gl-bind-src="path" />
+          <!-- Set the `textContent` to the item's `attribution`-->
+          <p gl-bind="attribution"></p>
+          <!-- Set the `innerHTML` to the item's `attribution`-->
+          <p gl-bind-html="attribution"></p>
+        </div>
+      </section>
     </main>
   </body>
 </html>
