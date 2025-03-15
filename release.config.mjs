@@ -5,9 +5,8 @@ export default {
   branches: [
     "main",
     {
-      channel: "alpha",
       name: "feat/*",
-      prerelease: true,
+      prerelease: "${name.replace('/', '-').toLowerCase()}",
     },
   ],
   plugins: [
