@@ -14,15 +14,14 @@
         <p gl-bind="bio">Bio</p>
         <h3>Socials</h3>
         <ul>
-          <!-- Cloned for every item in links -->
-          <!-- textContent set to the label of each item and href is set to url of each item  -->
-          <li gl-select="socials">
+          <!-- Iterate over the `socials` array and clone the `li` for each item -->
+          <li gl-iterate="socials">
+            <!-- Set `textContent` to the `label` of each socials item -->
+            <!-- Set `href` to the `url` of each socials item -->
             <a gl-bind="label" gl-bind-href="url">Social Link</a>
           </li>
         </ul>
       </div>
-
-      <p>Some text to test layout shifting</p>
     </main>
   </body>
 </html>

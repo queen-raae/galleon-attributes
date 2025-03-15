@@ -2,8 +2,7 @@
 name: Release
 on:
   push:
-    branches:
-      - main # only on main for now
+    # Run on pushes to all branches
 
 permissions:
   contents: read # for checkout

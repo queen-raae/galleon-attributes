@@ -52,8 +52,8 @@ Start by using our test APIs to get the hang of it.
 
 4. Select a _link_ child of the container element
 
-   ➕ Add attribute `gl-select` with value `socials`.\
-   💡 It will select the `socials` property of the data and create a copy of the element for each item.
+   ➕ Add attribute `gl-iterate` with value `socials`.\
+   💡 It will iterate over the `socials` property of the data and create a copy of the element for each item.
 
    ➕ Add attribute `gl-bind-href` with value `url`.\
    💡 It will bind the `href` attribute of the element to the `url` property of the `socials` item data.
@@ -72,7 +72,7 @@ Coming...
 | `gl-get`         | Fetches JSON data from an endpoint              | `<div gl-get="/api/data.json">`  |
 | `gl-bind`        | Binds element's text content to a data property | `<h1 gl-bind="title">Title</h1>` |
 | `gl-bind-[attr]` | Binds specific attributes to data properties    | `<img gl-bind-src="image.url">`  |
-| `gl-select`      | Iterates through array items                    | `<li gl-select="items">`         |
+| `gl-iterate`     | Iterates through array items                    | `<li gl-iterate="items">`        |
 
 ### The Values
 
