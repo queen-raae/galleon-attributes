@@ -8,12 +8,17 @@
     <load src="templates/navbar.html" />
 
     <main>
-      <!-- Get user data from the server -->
+      <!-- Get queen data from the server -->
       <div gl-get="/queen.json">
+        <!-- Set the `textContent` to the queen's `name` -->
         <h1 gl-bind="name">Name</h1>
+        <!-- Set the `textContent` to the queen's `bio` -->
         <p gl-bind="bio">Bio</p>
+        <!-- Set the `src` to the queen's `avatar.url` -->
+        <!-- Set the `alt` to the queen's `avatar.alt` -->
+        <img gl-bind-src="avatar.url" gl-bind-alt="avatar.alt" />
+        <!-- Set the `textContent` to `Socials` -->
         <h3>Socials</h3>
-        <ul>
           <!-- Iterate over the `socials` array and clone the `li` for each item -->
           <li gl-iterate="socials">
             <!-- Set `textContent` to the `label` of each socials item -->
