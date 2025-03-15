@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/queen-raae/galleon-attributes/compare/v1.1.1...v1.1.2) (2025-03-15)
+
+
+### Bug Fixes
+
+* support async/defer script loading ([#10](https://github.com/queen-raae/galleon-attributes/issues/10)) ([88abf6c](https://github.com/queen-raae/galleon-attributes/commit/88abf6c70a08a8f8032e0282449f02af14a835bd)), closes [#7](https://github.com/queen-raae/galleon-attributes/issues/7)
+
 ## [1.1.2-fix-support-async.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.1...v1.1.2-fix-support-async.1) (2025-03-15)
 
 
