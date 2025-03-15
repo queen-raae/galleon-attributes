@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.0...v1.1.1) (2025-03-15)
+
+
+### Bug Fixes
+
+* update queen data structure to match readme ([66a21e2](https://github.com/queen-raae/galleon-attributes/commit/66a21e276aeeb8085d1eb30e5ff2af54f16d67ca)), closes [#9](https://github.com/queen-raae/galleon-attributes/issues/9)
+
 # [1.1.0](https://github.com/queen-raae/galleon-attributes/compare/v1.0.1...v1.1.0) (2025-03-15)
 
 
