@@ -9,6 +9,11 @@ export default {
       channel: "${name.replace('/', '-').toLowerCase()}",
       prerelease: "${name.replace('/', '-').toLowerCase()}",
     },
+    {
+      name: "fix/*",
+      channel: "${name.replace('/', '-').toLowerCase()}",
+      prerelease: "${name.replace('/', '-').toLowerCase()}",
+    },
   ],
   plugins: [
     [

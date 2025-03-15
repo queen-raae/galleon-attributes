@@ -11,7 +11,7 @@ function createLogger(levelKey = "INFO") {
 
   function log(level, method, message, ...args) {
     if (level <= currentLevel) {
-      console[method](`Galleon:`, message, ...args);
+      console[method](`Galleon Attributes:`, message, ...args);
     }
   }
 

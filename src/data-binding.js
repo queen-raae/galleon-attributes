@@ -128,6 +128,7 @@ export function bindData(element, data, log) {
 }
 
 export async function initializeDataBinding(log) {
+  log.info("Initializing data binding");
   const getElements = document.querySelectorAll("[gl-get]");
   log.info(`Found ${getElements.length} elements with gl-get`);
 
