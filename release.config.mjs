@@ -5,8 +5,8 @@ export default {
   branches: [
     "main",
     {
-      name: "beta",
-      channel: "latest",
+      name: "feat/*",
+      prerelease: true,
     },
   ],
   plugins: [
