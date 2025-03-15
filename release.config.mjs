@@ -5,6 +5,7 @@ export default {
   branches: [
     "main",
     {
+      channel: "feat",
       name: "feat/*",
       prerelease: true,
     },
