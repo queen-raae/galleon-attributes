@@ -1,3 +1,10 @@
+## [1.1.2-fix-support-async.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.1...v1.1.2-fix-support-async.1) (2025-03-15)
+
+
+### Bug Fixes
+
+* support async script ([6d0096a](https://github.com/queen-raae/galleon-attributes/commit/6d0096a59fc9848cf02f40867846aa65dddc0010))
+
 ## [1.1.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.0...v1.1.1) (2025-03-15)
 
 
