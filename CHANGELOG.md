@@ -1,3 +1,5 @@
+## [1.1.5-feat-better-test-data-.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.4...v1.1.5-feat-better-test-data-.1) (2025-03-17)
+
 ## [1.1.5-fea.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.4...v1.1.5-fea.1) (2025-03-17)
 
 ## [1.1.4](https://github.com/queen-raae/galleon-attributes/compare/v1.1.3...v1.1.4) (2025-03-17)
