@@ -88,8 +88,8 @@ Galleon Attributes will be a part a larger Galleon fleet, aiming to unlock user 
 
 ## Join the Voyage
 
-- 📰 [Subscribe to our Galleon newsletter](https://galleon.tools)
+- 📰 [Subscribe to our Galleon Newsletter](https://galleon.outseta.com/email/lists/7maReJQE/subscribe)
 
-## Captain's Log (License)
+## License
 
 MIT © [Queen Raae](https://github.com/queen-raae)
