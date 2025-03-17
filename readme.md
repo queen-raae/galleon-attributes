@@ -36,11 +36,13 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
+   ![]()
 
 2. Select a _multiline text_ child of the container element
 
    ➕ Add attribute `gl-bind` with value `bio`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
+   ![]()
 
 3. Select an _image_ child of the container element
 
@@ -49,6 +51,7 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
    💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
+   ![]()
 
 4. Select a _link_ child of the container element
 
@@ -60,6 +63,7 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind` with value `label`.\
    💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
+   ![]()
 
 ## Treasure Map (User Guide)
 
