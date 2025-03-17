@@ -27,6 +27,11 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
   src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/script.js"
 ></script>
 ```
+![](assets/webflow-Galleon-Attributes-click-1-8.png)
+
+![](assets/webflow-Galleon-Attributes-click-9.png)
+
+![](assets/webflow-Galleon-Attributes-click-10.png)
 
 ### Test Galleon Attributes
 
@@ -36,6 +41,11 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
+   
+   ![](assets/webflow-Galleon-Attributes-click-11.png)
+   
+   ![](assets/webflow-Galleon-Attributes-click-12.png)
+
    ![]()
 
 2. Select a _multiline text_ child of the container element
