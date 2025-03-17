@@ -1,0 +1,12 @@
+{
+  "name": "BatCatDad",
+  "bio": "Also Also know as Captain BatCat",
+  "avatar": {
+    "url": "https://avatars.githubusercontent.com/u/58603611?s=96&v=4",
+    "alt": "BatCatDad"
+  },
+  "socials": [
+    { "url": "https://twitter.com/batcatsmirre", "label": "Twitter" },
+    { "url": "https://github.com/BatCatDad", "label": "GitHub" }
+  ]
+}
