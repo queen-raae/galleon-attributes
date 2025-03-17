@@ -6,13 +6,13 @@ export default {
     "main",
     {
       name: "feat/*",
-      channel: "${name.replace('/', '-').toLowerCase()}",
-      prerelease: "${name.replace('/', '-').toLowerCase()}",
+      channel: "${name.substring(0, 3).replace('/', '-').toLowerCase()}",
+      prerelease: "${name.substring(0, 3).replace('/', '-').toLowerCase()}",
     },
     {
       name: "fix/*",
-      channel: "${name.replace('/', '-').toLowerCase()}",
-      prerelease: "${name.replace('/', '-').toLowerCase()}",
+      channel: "${name.substring(0, 3).replace('/', '-').toLowerCase()}",
+      prerelease: "${name.substring(0, 3).replace('/', '-').toLowerCase()}",
     },
   ],
   plugins: [
