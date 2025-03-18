@@ -46,13 +46,14 @@ Start by using our test APIs to get the hang of it.
    
    ![](assets/webflow-Galleon-Attributes-click-12.png)
 
-   ![]()
+   ![](assets/gl-get-1.png)
 
 2. Select a _multiline text_ child of the container element
 
    ➕ Add attribute `gl-bind` with value `bio`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
-   ![]()
+   ![](assets/webflow-Gl-Attributes-click-14.png)
+   ![](assets/webflow-Gl-Attributes-15.png)
 
 3. Select an _image_ child of the container element
 
@@ -61,7 +62,9 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
    💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
-   ![]()
+   ![](assets/webflow-Gl-Attributes-16.png)
+   ![](assets/webflow-Gl-Attributes-17.png)
+   ![](assets/webflow-Gl-Attributes-18.png)
 
 4. Select a _link_ child of the container element
 
@@ -73,8 +76,9 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind` with value `label`.\
    💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
-   ![]()
-
+   ![](assets/webflow-Gl-Attributes-20.png)
+   ![](assets/webflow-Gl-Attributes-19.png)
+   
 ## Treasure Map (User Guide)
 
 Coming...
