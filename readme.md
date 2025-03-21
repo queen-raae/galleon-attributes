@@ -28,7 +28,7 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ></script>
 ```
 
-1. jjj
+
 
    ![Screenshot of clicking hamburger and "site settings" in Webflow](assets/webflow-Galleon-Attributes-click-1-8.png)
 
