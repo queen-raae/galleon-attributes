@@ -70,6 +70,10 @@ Start by using our test APIs to get the hang of it.
 
    ![Screenshot of adding the attributes named "gl-iterate", "gl-bind-href" and "gl-bind"](assets/step-4.png)
 
+5. Publish your changes and see the magic happen!
+
+![Screenshot of the final result](assets/step-5.png)
+
 ## Treasure Map (User Guide)
 
 Coming...
