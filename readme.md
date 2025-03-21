@@ -27,11 +27,14 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
   src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/script.js"
 ></script>
 ```
-![Screenshot of clicking hamburger and "site settings" in Webflow](assets/webflow-Galleon-Attributes-click-1-8.png)
 
-![Screenshot of clicking "custom code" in Webflow](assets/webflow-Galleon-Attributes-click-9.png)
+1. Select a container element to hold the data
 
-![Screenshot of pasting a script into webflow "Head Code"](assets/webflow-Galleon-Attributes-click-10.png)
+   ![Screenshot of clicking hamburger and "site settings" in Webflow](assets/webflow-Galleon-Attributes-click-1-8.png)
+
+   ![Screenshot of clicking "custom code" in Webflow](assets/webflow-Galleon-Attributes-click-9.png)
+
+   ![Screenshot of pasting a script into webflow "Head Code"](assets/webflow-Galleon-Attributes-click-10.png)
 
 ### Test Galleon Attributes
 
