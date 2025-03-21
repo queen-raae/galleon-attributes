@@ -24,7 +24,7 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ```html
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/script.js"
+  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/script.js"
 ></script>
 ```
 ![](assets/webflow-Galleon-Attributes-click-1-8.png)
@@ -39,7 +39,7 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/queen.json`.\
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
    
    ![](assets/webflow-Galleon-Attributes-click-11.png)
@@ -106,8 +106,8 @@ Galleon Attributes will be a part a larger Galleon fleet, aiming to unlock user 
 
 ## Join the Voyage
 
-- 📰 [Subscribe to our Galleon newsletter](https://galleon.tools)
+- 📰 [Subscribe to our Galleon Newsletter](https://galleon.outseta.com/email/lists/7maReJQE/subscribe)
 
-## Captain's Log (License)
+## License
 
 MIT © [Queen Raae](https://github.com/queen-raae)
