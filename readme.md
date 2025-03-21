@@ -45,6 +45,7 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind` with value `name`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
+
    ![Screenhsot of adding the attribute named "gl-bind" with the value "bio"](assets/step-2.png)
 
 3. Select an _image_ child of the container element
@@ -72,7 +73,7 @@ Start by using our test APIs to get the hang of it.
 
 5. Publish your changes and see the magic happen!
 
-![Screenshot of the final result](assets/step-5.png)
+   ![Screenshot of the final result](assets/step-5.png)
 
 ## Treasure Map (User Guide)
 
