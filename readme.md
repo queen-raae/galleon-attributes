@@ -24,9 +24,14 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ```html
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/script.js"
+  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/script.js"
 ></script>
 ```
+![Screenshot of clicking hamburger and "site settings" in Webflow](assets/webflow-Galleon-Attributes-click-1-8.png)
+
+![Screenshot of clicking "custom code" in Webflow](assets/webflow-Galleon-Attributes-click-9.png)
+
+![Screenshot of pasting a script into webflow "Head Code"](assets/webflow-Galleon-Attributes-click-10.png)
 
 ### Test Galleon Attributes
 
@@ -34,13 +39,21 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/queen.json`.\
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
+   
+   ![Screenshot of clicking "+" and "Container" in Webflow](assets/webflow-Galleon-Attributes-click-11.png)
+   
+   ![Screenshot of clicking "+" in webflow custom attributes](assets/webflow-Galleon-Attributes-click-12.png)
+
+   ![Screenshot of pasting a JSON link into a webflow custom attribute called "gl-get"](assets/gl-get-1.png)
 
 2. Select a _multiline text_ child of the container element
 
    ➕ Add attribute `gl-bind` with value `bio`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
+   ![Screenshot of clicking "+" and "Text Block" in webflow](assets/webflow-Gl-Attributes-click-14.png)
+   ![Screenshot of clicking "+" in webflow and adding a custom attribute named "gl-bind" with the value "bio"](assets/webflow-Gl-Attributes-15.png)
 
 3. Select an _image_ child of the container element
 
@@ -49,6 +62,9 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
    💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
+   ![Screenshot of clicking "+" and "Image" in webflow](assets/webflow-Gl-Attributes-16.png)
+   ![Screenshot of clicking "+" in webflow and adding a custom attribute named "gl-bind-src" with the value "avatar.url"](assets/webflow-Gl-Attributes-17.png)
+   ![Screenshot of clicking "+" in webflow and adding a custom attribute named "gl-bind-alt" with the value "avatar.alt"](assets/webflow-Gl-Attributes-18.png)
 
 4. Select a _link_ child of the container element
 
@@ -60,7 +76,9 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind` with value `label`.\
    💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
-
+   ![Screenshot of clicking "+" and "Link Block" in webflow](assets/webflow-Gl-Attributes-20.png)
+   ![Screenshot of clicking "+" in webflow and adding a custom attribute named "gl-iterate" with the value "socials  and adding a custom attribute named "gl-bind-href" with the value "url" and adding a custom attribute named "gl-bind" with the value "label"](assets/webflow-Gl-Attributes-19.png)
+   
 ## Treasure Map (User Guide)
 
 Coming...
@@ -88,8 +106,9 @@ Galleon Attributes will be a part a larger Galleon fleet, aiming to unlock user 
 
 ## Join the Voyage
 
-- 📰 [Subscribe to our Galleon Newsletter](https://galleon.outseta.com/email/lists/7maReJQE/subscribe)
+- 📰 [Subscribe to our Galleon newsletter](https://galleon.tools)
 
-## License
+## Captain's Log (License)
 
 MIT © [Queen Raae](https://github.com/queen-raae)
+
