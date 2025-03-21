@@ -43,7 +43,7 @@ Start by using our test APIs to get the hang of it.
 
 2. Select a _multiline text_ child of the container element
 
-   ➕ Add attribute `gl-bind` with value `bio`.\
+   ➕ Add attribute `gl-bind` with value `name`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
    ![Screenhsot of adding the attribute named "gl-bind" with the value "bio"](assets/step-2.png)
 
