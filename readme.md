@@ -24,9 +24,11 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 ```html
 <script
   async
-  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/script.js"
+  src="https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/script.js"
 ></script>
 ```
+
+![Screenshot of adding the script into Site Settings > Custom Code > Head Code](assets/step-0.png)
 
 ### Test Galleon Attributes
 
@@ -34,13 +36,17 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/queen.json`.\
+   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@v1/dist/queen.json`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
+
+   ![Screenshot of adding the attribute called "gl-get" with the value of the test API endpoint](assets/step-1.png)
 
 2. Select a _multiline text_ child of the container element
 
-   ➕ Add attribute `gl-bind` with value `bio`.\
+   ➕ Add attribute `gl-bind` with value `name`.\
    💡 It will bind the text content of the element to the `bio` property of the data.
+
+   ![Screenhsot of adding the attribute named "gl-bind" with the value "bio"](assets/step-2.png)
 
 3. Select an _image_ child of the container element
 
@@ -49,6 +55,8 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
    💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
+
+   ![Screenhsot of adding the attributes named "gl-bind-src" and "gl-bind-alt"](assets/step-3.png)
 
 4. Select a _link_ child of the container element
 
@@ -60,6 +68,12 @@ Start by using our test APIs to get the hang of it.
 
    ➕ Add attribute `gl-bind` with value `label`.\
    💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
+
+   ![Screenshot of adding the attributes named "gl-iterate", "gl-bind-href" and "gl-bind"](assets/step-4.png)
+
+5. Publish your changes and see the magic happen!
+
+   ![Screenshot of the final result](assets/step-5.png)
 
 ## Treasure Map (User Guide)
 
@@ -88,8 +102,8 @@ Galleon Attributes will be a part a larger Galleon fleet, aiming to unlock user 
 
 ## Join the Voyage
 
-- 📰 [Subscribe to our Galleon Newsletter](https://galleon.outseta.com/email/lists/7maReJQE/subscribe)
+- 📰 [Subscribe to our Galleon newsletter](https://galleon.tools)
 
-## License
+## Captain's Log (License)
 
 MIT © [Queen Raae](https://github.com/queen-raae)
