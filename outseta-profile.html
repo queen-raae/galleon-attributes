@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Outseta Configuration -->
+    <script>
+      var o_options = {
+        domain: "snippets.outseta.com",
+        auth: {
+          // Only because I use this testing account
+          // for multiple demos and need to override
+          // the Post Login Url configured in Outseta.
+          authenticationCallbackUrl: window.location.href,
+          registrationConfirmationUrl: window.location.href,
+        },
+      };
+    </script>
+    <!-- Outseta External Script -->
+    <script
+      src="https://cdn.outseta.com/outseta.min.js"
+      data-options="o_options"
+    ></script>
+
+    <script>
+      console.log("Initial", Outseta.getAccessToken());
+      Outseta.on("accessToken.set", function (token) {
+        console.log("accessToken", token);
+      });
+    </script>
+
+    <load src="templates/head.html" />
+
+    <title>Outseta Profile</title>
+  </head>
+  <body>
+    <load src="templates/navbar.html" />
+
+    <div>
+      <button data-o-auth="1" data-mode="popup" data-widget-mode="register">
+        Signup Button
+      </button>
+      <button data-o-auth="1" data-mode="popup" data-widget-mode="login">
+        Login Button
+      </button>
+      <button data-o-logout-link>Logout</button>
+    </div>
+
+    <main>
+      <!-- Get queen data from the server -->
+      <div
+        gl-get="https://snippets.outseta.com/api/v1/profile?fields=*,Account.*"
+        gl-auth="query:access_token"
+      >
+        <!-- Set the `textContent` to the profile `FullName` -->
+        <h1 gl-bind="FullName">Name</h1>
+        <!-- Set the `textContent` to the profile `Email` -->
+        <p gl-bind="Email">Email</p>
+        <!-- Set the `src` to the profile `ProfileImageS3Url` -->
+        <!-- Set the `alt` to the profile `FullName` -->
+        <img gl-bind-src="ProfileImageS3Url" gl-bind-alt="FullName" />
+
+        <!-- Set the `textContent` to the profile `Account.Name` -->
+        <h2 gl-bind="Account.Name">Account Name</h2>
+      </div>
+    </main>
+  </body>
+</html>
