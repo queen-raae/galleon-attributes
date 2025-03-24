@@ -146,8 +146,8 @@ window.getMyToken = function () {
   return "your-custom-token";
 };
 
-// Then reference it by name
-<div gl-get="/api/data" gl-auth-token="getMyToken"></div>;
+// Then reference it by name using the function call syntax
+<div gl-get="/api/data" gl-auth-token="getMyToken()"></div>;
 ```
 
 ```javascript
@@ -158,8 +158,8 @@ window.Auth = {
   },
 };
 
-// Reference using dot notation
-<div gl-get="/api/data" gl-auth-token="Auth.getToken"></div>;
+// Then reference it by name using the function call syntax
+<div gl-get="/api/data" gl-auth-token="Auth.getToken()"></div>;
 ```
 
 ## The Galleon Tools

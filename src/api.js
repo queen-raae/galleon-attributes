@@ -110,31 +110,43 @@ export function getAuthHeader({ authTokenSources }, log) {
           break;
 
         case "global":
-          // Handle nested properties like "Outseta.getAccessToken"
-          const pathParts = authTokenKey.split(".");
-          let globaleKey = window;
+          // Check if we have a function call syntax with parentheses
+          const functionCallMatch = authTokenKey.match(/^([\w\.]+)\(\)$/);
 
-          // Navigate through the object path
-          for (const part of pathParts) {
-            if (globaleKey && typeof globaleKey === "object") {
-              globaleKey = globaleKey[part];
+          if (functionCallMatch) {
+            // It's a function call syntax with parentheses
+            const funcPath = functionCallMatch[1];
+            log.debug(`Detected function call syntax: ${funcPath}()`);
+
+            // Get the function from the global scope
+            const globalFunc = getGlobalValue(funcPath, log);
+
+            // Call the function if it exists
+            if (typeof globalFunc === "function") {
+              authToken = globalFunc();
+              log.debug(
+                `Called function from global scope with path: ${funcPath}()`
+              );
             } else {
-              globaleKey = undefined;
-              break;
+              log.warn(`Function not found or not callable: ${funcPath}`);
             }
-          }
-
-          // Check if it's a function
-          if (typeof globaleKey === "function") {
-            authToken = globaleKey();
-            log.debug(
-              `Called function from global scope with path: ${authTokenKey}`
-            );
           } else {
-            authToken = globaleKey;
-            log.debug(
-              `Retrieved value from global scope with path: ${authTokenKey}`
-            );
+            // Handle nested properties like "Outseta.getAccessToken" (no parentheses)
+            // or simple global variables
+            const globalValue = getGlobalValue(authTokenKey, log);
+
+            // Check if it's a function (legacy behavior without parentheses)
+            if (typeof globalValue === "function") {
+              authToken = globalValue();
+              log.debug(
+                `Called function from global scope with path: ${authTokenKey} (legacy syntax without parentheses)`
+              );
+            } else {
+              authToken = globalValue;
+              log.debug(
+                `Retrieved value from global scope with path: ${authTokenKey}`
+              );
+            }
           }
           break;
 
@@ -161,19 +173,79 @@ export function getAuthHeader({ authTokenSources }, log) {
   return null;
 }
 
+/**
+ * Retrieves a value from the global scope using a dot notation path
+ * @param {string} path - The dot notation path to the value
+ * @param {object} log - Logger instance
+ * @returns {any} The value at the specified path or undefined if not found
+ */
+export function getGlobalValue(path, log) {
+  if (!path) {
+    log.debug(`Invalid path: ${path}`);
+    return undefined;
+  }
+
+  log.debug(`Retrieving global value for path: ${path}`);
+
+  try {
+    // Use reduce to navigate through the object path
+    const value = path.split(".").reduce((acc, part) => {
+      if (!acc || typeof acc !== "object") {
+        return undefined;
+      }
+
+      if (!(part in acc)) {
+        log.debug(`Property "${part}" not found in global scope`);
+        return undefined;
+      }
+
+      return acc[part];
+    }, window);
+
+    log.debug(`Retrieved global value for path: ${path}`, value);
+    return value;
+  } catch (error) {
+    log.error(`Error retrieving global value for path: ${path}:`, error);
+    return undefined;
+  }
+}
+
 export function getValue(obj, path, log) {
+  if (!obj || !path) {
+    log.debug(`Invalid object or path: ${path}`);
+    return undefined;
+  }
+
   log.debug(`Resolving path: "${path}"`, { object: obj });
 
   try {
+    // Use reduce to navigate through the object path
     const value = path.split(".").reduce((acc, part) => {
+      if (acc === undefined || acc === null) {
+        return undefined;
+      }
+
+      // Handle array indexing
       const arrayMatch = part.match(/(\w+)\[(\d+)\]/);
       if (arrayMatch) {
         const arrayName = arrayMatch[1];
         const index = parseInt(arrayMatch[2], 10);
         log.debug(`Accessing array "${arrayName}" at index ${index}`);
+
+        if (!acc[arrayName] || !Array.isArray(acc[arrayName])) {
+          log.debug(`Array "${arrayName}" not found or not an array`);
+          return undefined;
+        }
+
         return acc[arrayName][index];
       }
+
       log.debug(`Accessing object property "${part}"`);
+      if (!(part in acc)) {
+        log.debug(`Property "${part}" not found`);
+        return undefined;
+      }
+
       return acc[part];
     }, obj);
 

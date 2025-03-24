@@ -48,7 +48,7 @@
       <!-- Get queen data from the server -->
       <div
         gl-get="https://deploy-preview-25--galleon-tools.netlify.app/v1/outseta/me"
-        gl-auth-token="Outseta.getAccessToken, query:access_token"
+        gl-auth-token="Outseta.getAccessToken(), query:access_token"
       >
         <!-- Set the `textContent` to the response `greeting` -->
         <h1 gl-bind="greeting">Personlized Greeting</h1>
