@@ -81,23 +81,25 @@ Coming...
 
 ### The Attributes
 
-| Attribute        | Purpose                                         | Example                           |
-| ---------------- | ----------------------------------------------- | --------------------------------- |
-| `gl-get`         | Fetches JSON data from an endpoint              | `<div gl-get="/api/data.json">`   |
-| `gl-bind`        | Binds element's text content to a data property | `<h1 gl-bind="title">Title</h1>`  |
-| `gl-bind-[attr]` | Binds specific attributes to data properties    | `<img gl-bind-src="image.url">`   |
-| `gl-iterate`     | Iterates through array items                    | `<li gl-iterate="items">`         |
-| `gl-auth`        | Authentication source and key                   | `<div gl-auth="local:userToken">` |
+| Attribute        | Purpose                                         | Example                                 |
+| ---------------- | ----------------------------------------------- | --------------------------------------- |
+| `gl-get`         | Fetches JSON data from an endpoint              | `<div gl-get="/api/data.json">`         |
+| `gl-bind`        | Binds element's text content to a data property | `<h1 gl-bind="title">Title</h1>`        |
+| `gl-bind-[attr]` | Binds specific attributes to data properties    | `<img gl-bind-src="image.url">`         |
+| `gl-iterate`     | Iterates through array items                    | `<li gl-iterate="items">`               |
+| `gl-auth-token`  | Authentication source and key                   | `<div gl-auth-token="local:userToken">` |
+
+#### `gl-bind`, `gl-bind-[attr]` and `gl-iterate`
 
 - **Properties**: Access properties with dot notation, such as `user.profile.name`
 - **Array Indexing**: Access specific items with `property[index]` syntax, such as `socials[0].url`
 
 ### Authorization
 
-You can authenticate API requests using the `gl-auth` attribute with a concise format:
+You can authenticate API requests using the `gl-auth-token` attribute with a concise format:
 
 ```html
-<div gl-get="/api/private-data" gl-auth="local:userToken"></div>
+<div gl-get="/api/private-data" gl-auth-token="local:userToken"></div>
 ```
 
 The format is `source:key` where:
@@ -107,26 +109,26 @@ The format is `source:key` where:
 
 Examples:
 
-- `gl-auth="local:userToken"` - Get token from localStorage with key "userToken"
-- `gl-auth="session:apiKey"` - Get token from sessionStorage with key "apiKey"
-- `gl-auth="query:token"` - Get token from URL query parameter with key "token"
-- `gl-auth="authToken"` - Use a global variable named "authToken"
-- `gl-auth="ThirdParty.getToken"` - Use a nested path to access global methods like ThirdParty.getToken
+- `gl-auth-token="local:userToken"` - Get token from localStorage with key "userToken"
+- `gl-auth-token="session:apiKey"` - Get token from sessionStorage with key "apiKey"
+- `gl-auth-token="query:token"` - Get token from URL query parameter with key "token"
+- `gl-auth-token="authToken"` - Use a global variable named "authToken"
+- `gl-auth-token="ThirdParty.getToken"` - Use a nested path to access global methods like ThirdParty.getToken
 
 #### Multiple Auth Sources
 
-You can specify multiple auth sources in a single `gl-auth` attribute using comma-separated values. The system will try each source in order and use the first one that has a valid value:
+You can specify multiple auth sources in a single `gl-auth-token` attribute using comma-separated values. The system will try each source in order and use the first one that has a valid value:
 
 ```html
 <div
   gl-get="/api/data"
-  gl-auth="query:token, local:authToken, session:apiKey"
+  gl-auth-token="query:token, local:authToken, session:apiKey"
 ></div>
 ```
 
 This will first check for a URL query parameter named "token", then localStorage, and finally sessionStorage. The first source to return a truthy value will be used.
 
-> **Important**: When `gl-auth` is specified but no valid value is found from any source, the request will be skipped entirely. This helps prevent failed API requests to protected endpoints.
+> **Important**: When `gl-auth-token` is specified but no valid value is found from any source, the request will be skipped entirely. This helps prevent failed API requests to protected endpoints.
 
 For global scope, you can use nested paths to access properties and methods on objects. If the value is a function, it will be called to retrieve the token. If it's not a function, its value will be used directly as the token.
 
@@ -135,7 +137,7 @@ For global scope, you can use nested paths to access properties and methods on o
 window.myAuthToken = "a-unique-token";
 
 // Then reference it by name
-<div gl-get="/api/data" gl-auth="myAuthToken"></div>;
+<div gl-get="/api/data" gl-auth-token="myAuthToken"></div>;
 ```
 
 ```javascript
@@ -145,7 +147,7 @@ window.getMyToken = function () {
 };
 
 // Then reference it by name
-<div gl-get="/api/data" gl-auth="getMyToken"></div>;
+<div gl-get="/api/data" gl-auth-token="getMyToken"></div>;
 ```
 
 ```javascript
@@ -157,7 +159,7 @@ window.Auth = {
 };
 
 // Reference using dot notation
-<div gl-get="/api/data" gl-auth="Auth.getToken"></div>;
+<div gl-get="/api/data" gl-auth-token="Auth.getToken"></div>;
 ```
 
 ## The Galleon Tools

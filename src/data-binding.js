@@ -137,7 +137,7 @@ export async function initializeDataBinding(log) {
     log.debug(`Processing element with endpoint: ${endpoint}`);
 
     // Process auth attributes - handle comma-separated values
-    const authAttr = element.getAttribute("gl-auth");
+    const authAttr = element.getAttribute("gl-auth-token");
     const authTokenSources = authAttr
       ? authAttr.split(",").map((src) => src.trim())
       : [];
