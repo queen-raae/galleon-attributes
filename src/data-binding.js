@@ -136,7 +136,13 @@ export async function initializeDataBinding(log) {
     const endpoint = element.getAttribute("gl-get");
     log.debug(`Processing element with endpoint: ${endpoint}`);
 
-    const data = await fetchData(endpoint, log);
+    // Process auth attributes - handle comma-separated values
+    const authAttr = element.getAttribute("gl-auth-token");
+    const authTokenSources = authAttr
+      ? authAttr.split(",").map((src) => src.trim())
+      : [];
+
+    const data = await fetchData(endpoint, { authTokenSources }, log);
     if (data) {
       log.debug(`Processing container with data:`, data);
       processTemplateElement(element, data, "", log);

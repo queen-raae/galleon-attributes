@@ -31,7 +31,6 @@ export default {
             release: "patch",
           },
           {
-            type: "chore",
             scope: "release",
             release: "patch",
           },

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Outseta Configuration -->
+    <script>
+      var o_options = {
+        domain: "snippets.outseta.com",
+        auth: {
+          // Only because I use this testing account
+          // for multiple demos and need to override
+          // the Post Login Url configured in Outseta.
+          authenticationCallbackUrl: window.location.href,
+          registrationConfirmationUrl: window.location.href,
+        },
+      };
+    </script>
+    <!-- Outseta External Script -->
+    <script
+      src="https://cdn.outseta.com/outseta.min.js"
+      data-options="o_options"
+    ></script>
+
+    <script>
+      console.log("Initial", Outseta.getAccessToken());
+      Outseta.on("accessToken.set", function (token) {
+        console.log("accessToken", token);
+      });
+    </script>
+
+    <load src="templates/head.html" />
+
+    <title>Outseta Profile</title>
+  </head>
+  <body>
+    <load src="templates/navbar.html" />
+
+    <div>
+      <button data-o-auth="1" data-mode="popup" data-widget-mode="register">
+        Signup Button
+      </button>
+      <button data-o-auth="1" data-mode="popup" data-widget-mode="login">
+        Login Button
+      </button>
+      <button data-o-logout-link>Logout</button>
+    </div>
+
+    <main>
+      <!-- Get queen data from the server -->
+      <div
+        gl-get="https://deploy-preview-25--galleon-tools.netlify.app/v1/outseta/me"
+        gl-auth-token="Outseta.getAccessToken(), query:access_token"
+      >
+        <!-- Set the `textContent` to the response `greeting` -->
+        <h1 gl-bind="greeting">Personlized Greeting</h1>
+        <!-- Set the `textContent` to the response `description` -->
+        <p gl-bind-html="description">Personalized Description</p>
+      </div>
+    </main>
+  </body>
+</html>
