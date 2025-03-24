@@ -48,7 +48,7 @@
       <!-- Get queen data from the server -->
       <div
         gl-get="https://snippets.outseta.com/api/v1/profile?fields=*,Account.*"
-        gl-auth="query:access_token"
+        gl-auth="Outseta.getAccessToken, query:access_token"
       >
         <!-- Set the `textContent` to the profile `FullName` -->
         <h1 gl-bind="FullName">Name</h1>

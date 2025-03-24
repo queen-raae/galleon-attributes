@@ -111,9 +111,22 @@ Examples:
 - `gl-auth="session:apiKey"` - Get token from sessionStorage with key "apiKey"
 - `gl-auth="query:token"` - Get token from URL query parameter with key "token"
 - `gl-auth="authToken"` - Use a global variable named "authToken"
-- `gl-auth="ThirdParty.getToken"` - Use a nested path to access methods like ThirdParty.getToken
+- `gl-auth="ThirdParty.getToken"` - Use a nested path to access global methods like ThirdParty.getToken
 
-> **Important**: When `gl-auth` is specified but no valid token is found, the request will be skipped entirely. This helps prevent failed API requests to protected endpoints.
+#### Multiple Auth Sources
+
+You can specify multiple auth sources in a single `gl-auth` attribute using comma-separated values. The system will try each source in order and use the first one that has a valid value:
+
+```html
+<div
+  gl-get="/api/data"
+  gl-auth="query:token, local:authToken, session:apiKey"
+></div>
+```
+
+This will first check for a URL query parameter named "token", then localStorage, and finally sessionStorage. The first source to return a truthy value will be used.
+
+> **Important**: When `gl-auth` is specified but no valid value is found from any source, the request will be skipped entirely. This helps prevent failed API requests to protected endpoints.
 
 For global scope, you can use nested paths to access properties and methods on objects. If the value is a function, it will be called to retrieve the token. If it's not a function, its value will be used directly as the token.
 

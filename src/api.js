@@ -55,99 +55,113 @@ export async function fetchData(endpoint, options, log) {
 
 export function getAuthHeader(options = {}, log) {
   // If no auth source specified, return null
-  if (!options.authTokenSource || typeof options.authTokenSource !== "string") {
+  if (!options.authTokenSource) {
     log.debug("No auth token source specified");
     return null;
   }
 
-  // Handle default global scope
-  let authTokenType = "global";
-  let authTokenKey = options.authTokenSource;
+  // Handle both string (compatibility) and array formats
+  const authSources = Array.isArray(options.authTokenSource)
+    ? options.authTokenSource
+    : options.authTokenSource.split(",").map((src) => src.trim());
 
-  // Handle "source:key"
-  const parts = options.authTokenSource.split(":");
-  if (parts.length === 2) {
-    authTokenType = parts[0];
-    authTokenKey = parts[1];
-  }
+  log.debug(`Found ${authSources.length} potential auth sources:`, authSources);
 
-  log.debug(
-    `Parsed auth string "${options.authTokenSource}" to type=${authTokenType}, key=${authTokenKey}`
-  );
+  // Try each auth source in order, return the first one with a non-empty value
+  for (const authSource of authSources) {
+    // Handle default global scope
+    let authTokenType = "global";
+    let authTokenKey = authSource;
 
-  let authToken;
-  try {
-    switch (authTokenType) {
-      case "localStorage":
-      case "local":
-        authToken = localStorage.getItem(authTokenKey || "authToken");
-        log.debug(
-          `Retrieved auth token from localStorage using key: ${authTokenKey}`
-        );
-        break;
+    // Handle "source:key"
+    const parts = authSource.split(":");
+    if (parts.length === 2) {
+      authTokenType = parts[0];
+      authTokenKey = parts[1];
+    }
 
-      case "sessionStorage":
-      case "session":
-        authToken = sessionStorage.getItem(authTokenKey || "authToken");
-        log.debug(
-          `Retrieved auth token from sessionStorage using key: ${authTokenKey}`
-        );
-        break;
+    log.debug(
+      `Trying auth source "${authSource}" (type=${authTokenType}, key=${authTokenKey})`
+    );
 
-      case "query":
-      case "url":
-        const urlParams = new URLSearchParams(window.location.search);
-        authToken = urlParams.get(authTokenKey || "authToken");
-        log.debug(
-          `Retrieved auth token from URL query parameter using key: ${authTokenKey}`
-        );
-        break;
+    let authToken;
+    try {
+      switch (authTokenType) {
+        case "localStorage":
+        case "local":
+          authToken = localStorage.getItem(authTokenKey || "authToken");
+          log.debug(
+            `Retrieved auth token from localStorage using key: ${authTokenKey}`
+          );
+          break;
 
-      case "global":
-        // Handle nested properties like "Outseta.getAccessToken"
-        const pathParts = authTokenKey.split(".");
-        let globaleKey = window;
+        case "sessionStorage":
+        case "session":
+          authToken = sessionStorage.getItem(authTokenKey || "authToken");
+          log.debug(
+            `Retrieved auth token from sessionStorage using key: ${authTokenKey}`
+          );
+          break;
 
-        // Navigate through the object path
-        for (const part of pathParts) {
-          if (globaleKey && typeof globaleKey === "object") {
-            globaleKey = globaleKey[part];
-          } else {
-            globaleKey = undefined;
-            break;
+        case "query":
+        case "url":
+          const urlParams = new URLSearchParams(window.location.search);
+          authToken = urlParams.get(authTokenKey || "authToken");
+          log.debug(
+            `Retrieved auth token from URL query parameter using key: ${authTokenKey}`
+          );
+          break;
+
+        case "global":
+          // Handle nested properties like "Outseta.getAccessToken"
+          const pathParts = authTokenKey.split(".");
+          let globaleKey = window;
+
+          // Navigate through the object path
+          for (const part of pathParts) {
+            if (globaleKey && typeof globaleKey === "object") {
+              globaleKey = globaleKey[part];
+            } else {
+              globaleKey = undefined;
+              break;
+            }
           }
-        }
 
-        // Check if it's a function
-        if (typeof globaleKey === "function") {
-          authToken = globaleKey();
-          log.debug(
-            `Called function from global scope with path: ${authTokenKey}`
-          );
-        } else {
-          authToken = globaleKey;
-          log.debug(
-            `Retrieved value from global scope with path: ${authTokenKey}`
-          );
-        }
-        break;
+          // Check if it's a function
+          if (typeof globaleKey === "function") {
+            authToken = globaleKey();
+            log.debug(
+              `Called function from global scope with path: ${authTokenKey}`
+            );
+          } else {
+            authToken = globaleKey;
+            log.debug(
+              `Retrieved value from global scope with path: ${authTokenKey}`
+            );
+          }
+          break;
 
-      default:
-        log.warn(`Unknown auth source type: ${authTokenType}`);
+        default:
+          log.warn(`Unknown auth source type: ${authTokenType}`);
+      }
+
+      // Only consider truthy values as valid
+      if (Boolean(authToken)) {
+        log.debug(`Found valid value from source: ${authSource}`);
+        return `Bearer ${authToken}`;
+      } else {
+        log.debug(
+          `Falsy value found from source: ${authSource}, trying next source`
+        );
+      }
+    } catch (error) {
+      log.error(`Error retrieving auth token from ${authSource}:`, error);
+      // Continue to the next source on error
     }
-
-    if (authToken) {
-      return `Bearer ${authToken}`;
-    } else {
-      log.debug(
-        "No auth token found, authentication required but not available"
-      );
-      return null;
-    }
-  } catch (error) {
-    log.error("Error retrieving auth token:", error);
-    return null;
   }
+
+  log.debug("No valid value found from any source");
+  return null;
 }
 
 export function getValue(obj, path, log) {
