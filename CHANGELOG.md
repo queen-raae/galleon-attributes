@@ -1,3 +1,5 @@
+# [1.2.0-feat-auth-suppo.2](https://github.com/queen-raae/galleon-attributes/compare/v1.2.0-feat-auth-suppo.1...v1.2.0-feat-auth-suppo.2) (2025-03-24)
+
 # [1.2.0-feat-auth-suppo.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.5...v1.2.0-feat-auth-suppo.1) (2025-03-24)
 
 
