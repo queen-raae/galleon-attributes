@@ -113,7 +113,9 @@ Examples:
 - `gl-auth-token="session:apiKey"` - Get token from sessionStorage with key "apiKey"
 - `gl-auth-token="query:token"` - Get token from URL query parameter with key "token"
 - `gl-auth-token="authToken"` - Use a global variable named "authToken"
-- `gl-auth-token="ThirdParty.getToken"` - Use a nested path to access global methods like ThirdParty.getToken
+- `gl-auth-token="Outseta.getAccessToken()"` - Use a global function named "getAccessToken" from the "Outseta" SDK
+
+> **Important**: When `gl-auth-token` is specified but no valid value is found, the request will be skipped. This helps prevent failed API requests to protected endpoints.
 
 #### Multiple Auth Sources
 
@@ -122,21 +124,19 @@ You can specify multiple auth sources in a single `gl-auth-token` attribute usin
 ```html
 <div
   gl-get="/api/data"
-  gl-auth-token="query:token, local:authToken, session:apiKey"
+  gl-auth-token="query:token, local:authToken, session:apiKey, ThirdParty.getToken()"
 ></div>
 ```
 
-This will first check for a URL query parameter named "token", then localStorage, and finally sessionStorage. The first source to return a truthy value will be used.
+This will first check for a URL query parameter named "token", then a value in localStorage under the key "authToken",
+then a value in sessionStorage under the key "apiKey", and finally a value from a global function named "getToken" from the "ThirdParty" SDK. The first source to return a truthy value will be used.
 
-> **Important**: When `gl-auth-token` is specified but no valid value is found from any source, the request will be skipped entirely. This helps prevent failed API requests to protected endpoints.
-
-For global scope, you can use nested paths to access properties and methods on objects. If the value is a function, it will be called to retrieve the token. If it's not a function, its value will be used directly as the token.
+#### Global Scope
 
 ```javascript
-// Auth value
+// Auth value in global scope
 window.myAuthToken = "a-unique-token";
 
-// Then reference it by name
 <div gl-get="/api/data" gl-auth-token="myAuthToken"></div>;
 ```
 
@@ -146,20 +146,35 @@ window.getMyToken = function () {
   return "your-custom-token";
 };
 
-// Then reference it by name using the function call syntax
 <div gl-get="/api/data" gl-auth-token="getMyToken()"></div>;
 ```
 
+For global scope, you can also use nested paths to access properties and methods on objects (or more usually SDKs).
+
 ```javascript
-// Nested object with auth method
+// Nested object with a token property in global scope
+window.Auth = {
+  token: "your-custom-token",
+};
+
+<div gl-get="/api/data" gl-auth-token="Auth.token"></div>;
+```
+
+```javascript
+// Nested object with auth method in global scope
 window.Auth = {
   getToken: function () {
     return "your-custom-token";
   },
 };
 
-// Then reference it by name using the function call syntax
 <div gl-get="/api/data" gl-auth-token="Auth.getToken()"></div>;
+```
+
+```javascript
+// With Outseta script and configuration already in place
+
+<div gl-get="/api/data" gl-auth-token="Outseta.getAccessToken()"></div>
 ```
 
 ## The Galleon Tools
