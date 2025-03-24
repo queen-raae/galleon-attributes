@@ -47,19 +47,13 @@
     <main>
       <!-- Get queen data from the server -->
       <div
-        gl-get="https://snippets.outseta.com/api/v1/profile?fields=*,Account.*"
+        gl-get="https://deploy-preview-25--galleon-tools.netlify.app/v1/outseta/me"
         gl-auth="Outseta.getAccessToken, query:access_token"
       >
-        <!-- Set the `textContent` to the profile `FullName` -->
-        <h1 gl-bind="FullName">Name</h1>
-        <!-- Set the `textContent` to the profile `Email` -->
-        <p gl-bind="Email">Email</p>
-        <!-- Set the `src` to the profile `ProfileImageS3Url` -->
-        <!-- Set the `alt` to the profile `FullName` -->
-        <img gl-bind-src="ProfileImageS3Url" gl-bind-alt="FullName" />
-
-        <!-- Set the `textContent` to the profile `Account.Name` -->
-        <h2 gl-bind="Account.Name">Account Name</h2>
+        <!-- Set the `textContent` to the response `greeting` -->
+        <h1 gl-bind="greeting">Personlized Greeting</h1>
+        <!-- Set the `textContent` to the response `description` -->
+        <p gl-bind-html="description">Personalized Description</p>
       </div>
     </main>
   </body>
