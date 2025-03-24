@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/queen-raae/galleon-attributes/compare/v1.1.5...v1.2.0) (2025-03-24)
+
+
+### Features
+
+* add auth support ([#20](https://github.com/queen-raae/galleon-attributes/issues/20)) ([0e0a27e](https://github.com/queen-raae/galleon-attributes/commit/0e0a27ed7c2336580ca4c283ba1856ad043415a8))
+
 # [1.2.0-feat-auth-suppo.2](https://github.com/queen-raae/galleon-attributes/compare/v1.2.0-feat-auth-suppo.1...v1.2.0-feat-auth-suppo.2) (2025-03-24)
 
 # [1.2.0-feat-auth-suppo.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.5...v1.2.0-feat-auth-suppo.1) (2025-03-24)
