@@ -138,15 +138,11 @@ export async function initializeDataBinding(log) {
 
     // Process auth attributes - handle comma-separated values
     const authAttr = element.getAttribute("gl-auth");
-    const authSources = authAttr
+    const authTokenSources = authAttr
       ? authAttr.split(",").map((src) => src.trim())
       : [];
 
-    let options = {
-      authTokenSource: authSources,
-    };
-
-    const data = await fetchData(endpoint, options, log);
+    const data = await fetchData(endpoint, { authTokenSources }, log);
     if (data) {
       log.debug(`Processing container with data:`, data);
       processTemplateElement(element, data, "", log);

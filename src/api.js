@@ -7,21 +7,20 @@ export async function fetchData(endpoint, options, log) {
     const headers = new Headers();
     headers.set("Content-Type", "application/json");
 
-    // Get auth header if needed
-    const authHeader = getAuthHeader(options, log);
+    if (options.authTokenSources.length > 0) {
+      // At least one auth token source is specified
+      const authHeader = getAuthHeader(options, log);
 
-    // Skip request if auth is required but no token was found
-    if (options.authTokenSource && !authHeader) {
-      log.warn(
-        `Authentication required but no valid token found. Skipping request to ${endpoint}`
-      );
-      return null;
-    }
-
-    // Add auth header if found
-    if (authHeader) {
-      headers.set("Authorization", authHeader);
-      log.debug("Authorization header set");
+      // Add auth header if found
+      if (authHeader) {
+        headers.set("Authorization", authHeader);
+        log.debug("Authorization header set");
+      } else {
+        log.warn(
+          `Authentication required but no valid token found. Skipping request to ${endpoint}`
+        );
+        return null;
+      }
     }
 
     const response = await fetch(endpoint, {
@@ -53,35 +52,33 @@ export async function fetchData(endpoint, options, log) {
   }
 }
 
-export function getAuthHeader(options = {}, log) {
+export function getAuthHeader({ authTokenSources }, log) {
   // If no auth source specified, return null
-  if (!options.authTokenSource) {
+  if (authTokenSources.length === 0) {
     log.debug("No auth token source specified");
     return null;
   }
 
-  // Handle both string (compatibility) and array formats
-  const authSources = Array.isArray(options.authTokenSource)
-    ? options.authTokenSource
-    : options.authTokenSource.split(",").map((src) => src.trim());
-
-  log.debug(`Found ${authSources.length} potential auth sources:`, authSources);
+  log.debug(
+    `Found ${authTokenSources.length} potential auth sources:`,
+    authTokenSources
+  );
 
   // Try each auth source in order, return the first one with a non-empty value
-  for (const authSource of authSources) {
+  for (const authTokenSource of authTokenSources) {
     // Handle default global scope
     let authTokenType = "global";
-    let authTokenKey = authSource;
+    let authTokenKey = authTokenSource;
 
     // Handle "source:key"
-    const parts = authSource.split(":");
+    const parts = authTokenSource.split(":");
     if (parts.length === 2) {
       authTokenType = parts[0];
       authTokenKey = parts[1];
     }
 
     log.debug(
-      `Trying auth source "${authSource}" (type=${authTokenType}, key=${authTokenKey})`
+      `Trying auth source "${authTokenSource}" (type=${authTokenType}, key=${authTokenKey})`
     );
 
     let authToken;
@@ -147,15 +144,15 @@ export function getAuthHeader(options = {}, log) {
 
       // Only consider truthy values as valid
       if (Boolean(authToken)) {
-        log.debug(`Found valid value from source: ${authSource}`);
+        log.debug(`Found valid value from source: ${authTokenSource}`);
         return `Bearer ${authToken}`;
       } else {
         log.debug(
-          `Falsy value found from source: ${authSource}, trying next source`
+          `Falsy value found from source: ${authTokenSource}, trying next source`
         );
       }
     } catch (error) {
-      log.error(`Error retrieving auth token from ${authSource}:`, error);
+      log.error(`Error retrieving auth token from ${authTokenSource}:`, error);
       // Continue to the next source on error
     }
   }
