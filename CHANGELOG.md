@@ -1,3 +1,11 @@
+# [1.2.0-feat-auth-suppo.1](https://github.com/queen-raae/galleon-attributes/compare/v1.1.5...v1.2.0-feat-auth-suppo.1) (2025-03-24)
+
+
+### Features
+
+* **auth:** add auth header support ([8fd95bc](https://github.com/queen-raae/galleon-attributes/commit/8fd95bca2cd653b8ae0b1d62dbbef22aa7e421a5))
+* **auth:** enhance gl-auth support and update navbar ([9d992b8](https://github.com/queen-raae/galleon-attributes/commit/9d992b892b65a4b5245387a909dcf3fb4a5b0ad2))
+
 ## [1.1.5](https://github.com/queen-raae/galleon-attributes/compare/v1.1.4...v1.1.5) (2025-03-21)
 
 ## [1.1.4](https://github.com/queen-raae/galleon-attributes/compare/v1.1.3...v1.1.4) (2025-03-17)
