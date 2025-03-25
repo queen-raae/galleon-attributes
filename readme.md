@@ -36,7 +36,7 @@ Start by using our test APIs to get the hang of it.
 
 1. Select a container element to hold the data
 
-   ➕ Add attribute `gl-get` with value `https://cdn.jsdelivr.net/npm/@raae/galleon-attributes@1/dist/queen.json`.\
+   ➕ Add attribute `gl-get` with value `https://galleon.tools/v1/queen`.\
    💡 It will fetch the data from the url and make it available to the element and its childrens.
 
    ![Screenshot of adding the attribute called "gl-get" with the value of the test API endpoint](assets/step-1.png)
