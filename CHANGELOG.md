@@ -1,3 +1,5 @@
+## [1.2.3](https://github.com/queen-raae/galleon-attributes/compare/v1.2.2...v1.2.3) (2025-04-11)
+
 ## [1.2.2](https://github.com/queen-raae/galleon-attributes/compare/v1.2.1...v1.2.2) (2025-03-25)
 
 ## [1.2.1](https://github.com/queen-raae/galleon-attributes/compare/v1.2.0...v1.2.1) (2025-03-24)
