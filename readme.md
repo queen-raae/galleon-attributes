@@ -99,7 +99,10 @@ Coming...
 You can authenticate API requests using the `gl-auth-token` attribute with a concise format:
 
 ```html
-<div gl-get="/api/private-data" gl-auth-token="local:userToken"></div>
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="local:userToken"
+></div>
 ```
 
 The format is `source:key` where:
@@ -123,7 +126,7 @@ You can specify multiple auth sources in a single `gl-auth-token` attribute usin
 
 ```html
 <div
-  gl-get="/api/data"
+  gl-get="https://example.com/api-with-auth/data"
   gl-auth-token="query:token, local:authToken, session:apiKey, ThirdParty.getToken()"
 ></div>
 ```
@@ -137,7 +140,10 @@ then a value in sessionStorage under the key "apiKey", and finally a value from 
 // Auth value in global scope
 window.myAuthToken = "a-unique-token";
 
-<div gl-get="/api/data" gl-auth-token="myAuthToken"></div>;
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="myAuthToken"
+></div>;
 ```
 
 ```javascript
@@ -146,7 +152,10 @@ window.getMyToken = function () {
   return "your-custom-token";
 };
 
-<div gl-get="/api/data" gl-auth-token="getMyToken()"></div>;
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="getMyToken()"
+></div>;
 ```
 
 For global scope, you can also use nested paths to access properties and methods on objects (or more usually SDKs).
@@ -157,7 +166,10 @@ window.Auth = {
   token: "your-custom-token",
 };
 
-<div gl-get="/api/data" gl-auth-token="Auth.token"></div>;
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="Auth.token"
+></div>;
 ```
 
 ```javascript
@@ -168,13 +180,19 @@ window.Auth = {
   },
 };
 
-<div gl-get="/api/data" gl-auth-token="Auth.getToken()"></div>;
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="Auth.getToken()"
+></div>;
 ```
 
 ```javascript
 // With Outseta script and configuration already in place
 
-<div gl-get="/api/data" gl-auth-token="Outseta.getAccessToken()"></div>
+<div
+  gl-get="https://example.com/api-with-auth/data"
+  gl-auth-token="Outseta.getAccessToken()"
+></div>
 ```
 
 ## The Galleon Tools
