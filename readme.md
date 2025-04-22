@@ -34,7 +34,9 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 
 Start by using our test APIs to get the hang of it.
 
-💡 If you use Outseta, jump to the [Test Galleon Attributes with Outseta](#test-galleon-attributes-with-outseta) section.
+💡 [Tip] If you use Outseta, jump to the [Test Galleon Attributes with Outseta](#test-galleon-attributes-with-outseta) section.
+
+#### Test API: Queen Raae Info 👑
 
 1. Select a container element to hold the data
 
@@ -85,6 +87,8 @@ Prerequisites:
 - The Outseta script and configuration added to the head of your site
 - Login functionality added to your site using Outseta embeds
 - The Galleon script added to the [head of your site](#add-the-galleon-script)
+
+#### Test API: Outseta User Info 🔑
 
 1. Select a container element to hold the data
 
