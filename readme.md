@@ -34,40 +34,42 @@ Add the following to your Webflow project's `Site Settings > Custom Code > Head 
 
 Start by using our test APIs to get the hang of it.
 
+💡 If you use Outseta, jump to the [Test Galleon Attributes with Outseta](#test-galleon-attributes-with-outseta) section.
+
 1. Select a container element to hold the data
 
    ➕ Add attribute `gl-get` with value `https://galleon.tools/v1/queen`.\
-   💡 It will fetch the data from the url and make it available to the element and its childrens.
+   ✨ It will fetch the data from the url and make it available to the element and its children.
 
    ![Screenshot of adding the attribute called "gl-get" with the value of the test API endpoint](assets/step-1.png)
 
 2. Select a _multiline text_ child of the container element
 
    ➕ Add attribute `gl-bind` with value `name`.\
-   💡 It will bind the text content of the element to the `bio` property of the data.
+   ✨ It will bind the text content of the element to the `bio` property of the response.
 
    ![Screenhsot of adding the attribute named "gl-bind" with the value "bio"](assets/step-2.png)
 
 3. Select an _image_ child of the container element
 
    ➕ Add attribute `gl-bind-src` with value `avatar.url`.\
-   💡 It will bind the `src` attribute of the element to the `avatar.url` property of the data.
+   ✨ It will bind the `src` attribute of the element to the `avatar.url` property of the response.
 
    ➕ Add attribute `gl-bind-alt` with value `avatar.alt`.\
-   💡 It will bind the `alt` attribute of the element to the `avatar.alt` property of the data.
+   ✨ It will bind the `alt` attribute of the element to the `avatar.alt` property of the response.
 
    ![Screenhsot of adding the attributes named "gl-bind-src" and "gl-bind-alt"](assets/step-3.png)
 
 4. Select a _link_ child of the container element
 
    ➕ Add attribute `gl-iterate` with value `socials`.\
-   💡 It will iterate over the `socials` property of the data and create a copy of the element for each item.
+   ✨ It will iterate over the `socials` property of the response and create a copy of the element for each item.
 
    ➕ Add attribute `gl-bind-href` with value `url`.\
-   💡 It will bind the `href` attribute of the element to the `url` property of the `socials` item data.
+   ✨ It will bind the `href` attribute of the element to the `url` property of the `socials` item response.
 
    ➕ Add attribute `gl-bind` with value `label`.\
-   💡 It will bind set the inner html content (text) of the element to the `label` property of the `socials` item data.
+   ✨ It will bind set the text content of the element to the `label` property of the `socials` item response.
 
    ![Screenshot of adding the attributes named "gl-iterate", "gl-bind-href" and "gl-bind"](assets/step-4.png)
 
@@ -75,19 +77,57 @@ Start by using our test APIs to get the hang of it.
 
    ![Screenshot of the final result](assets/step-5.png)
 
+### Test Galleon Attributes with Outseta
+
+Prerequisites:
+
+- An Outseta account
+- The Outseta script and configuration added to the head of your site
+- Login functionality added to your site using Outseta embeds
+- The Galleon script added to the [head of your site](#add-the-galleon-script)
+
+1. Select a container element to hold the data
+
+   ➕ Add attribute `gl-get` with value `https://galleon.tools/v1/outseta/me`.\
+   ➕ Add attribute `gl-auth-token` with value `Outseta.getAccessToken(), query:access_token`.\
+   ✨ It will fetch the data from the url and make it available to the element and its children.
+
+   💡 The test API endpoint `galleon.tools/v1/outseta/me` verifies the access token and creates a personalized greeting and summary of the user's data.
+
+   ![Screenshot of adding the attributes named "gl-get" and "gl-auth-token"](assets/step-auth-1.png)
+
+2. Select a _text_ child of the container element
+
+   ➕ Add attribute `gl-bind` with value `greeting`.\
+   ✨ It will bind the text content of the element to the personalized `greeting` property of the response.
+
+   ![Screenshot of adding the attribute named "gl-bind" with the value "greeting"](assets/step-auth-2.png)
+
+3. Select a _multiline text_ child of the container element
+
+   ➕ Add attribute `gl-bind-html` with value `summary`.\
+   ✨ It will bind the html content of the element to the personalized `summary` property of the response.
+
+   ![Screenshot of adding the attribute named "gl-bind-html" with the value "summary"](assets/step-auth-3.png)
+
+4. Publish your changes and see the magic happen!
+
+   ![Screenshot of the final result](assets/step-auth-4.png)
+
 ## Treasure Map (User Guide)
 
 Coming...
 
 ### The Attributes
 
-| Attribute        | Purpose                                         | Example                                 |
-| ---------------- | ----------------------------------------------- | --------------------------------------- |
-| `gl-get`         | Fetches JSON data from an endpoint              | `<div gl-get="/api/data.json">`         |
-| `gl-bind`        | Binds element's text content to a data property | `<h1 gl-bind="title">Title</h1>`        |
-| `gl-bind-[attr]` | Binds specific attributes to data properties    | `<img gl-bind-src="image.url">`         |
-| `gl-iterate`     | Iterates through array items                    | `<li gl-iterate="items">`               |
-| `gl-auth-token`  | Authentication source and key                   | `<div gl-auth-token="local:userToken">` |
+| Attribute        | Purpose                                               | Example                                 |
+| ---------------- | ----------------------------------------------------- | --------------------------------------- |
+| `gl-get`         | Fetches JSON data from an endpoint                    | `<div gl-get="/api/data.json">`         |
+| `gl-bind`        | Binds element's text content to a data property       | `<h1 gl-bind="title">Title</h1>`        |
+| `gl-bind-[attr]` | Binds specific attributes to data properties          | `<img gl-bind-src="image.url">`         |
+| `gl-bind-html`   | Binds element's inner html content to a data property | `<div gl-bind-html="content">`          |
+| `gl-iterate`     | Iterates through array items                          | `<li gl-iterate="items">`               |
+| `gl-auth-token`  | Authentication source and key                         | `<div gl-auth-token="local:userToken">` |
 
 #### `gl-bind`, `gl-bind-[attr]` and `gl-iterate`
 
