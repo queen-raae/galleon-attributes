@@ -81,7 +81,7 @@ Start by using our test APIs to get the hang of it.
 
 ### Test Galleon Attributes with Outseta
 
-Prerequisites:
+#### Prerequisites
 
 - An Outseta account
 - The Outseta script and configuration added to the head of your site
@@ -117,6 +117,8 @@ Prerequisites:
 4. Publish your changes and see the magic happen!
 
    ![Screenshot of the final result](assets/step-auth-4.png)
+
+💡 [Tip] Not the most exciting user info, but you can use this approach to fetch data from any API that expects the Outseta access token, such as a custom API from your backend devs. Or use a similar approach to fetch data from any other API that requires authentication, see the [Authorization](#authorization) section for more details.
 
 ## Treasure Map (User Guide)
 
