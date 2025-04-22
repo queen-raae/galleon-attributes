@@ -35,25 +35,38 @@
     <load src="templates/navbar.html" />
 
     <div>
-      <button data-o-auth="1" data-mode="popup" data-widget-mode="register">
-        Signup Button
+      <button
+        data-o-auth="1"
+        data-mode="popup"
+        data-widget-mode="register"
+        data-o-anonymous
+      >
+        Signup
       </button>
-      <button data-o-auth="1" data-mode="popup" data-widget-mode="login">
-        Login Button
+      <button
+        data-o-auth="1"
+        data-mode="popup"
+        data-widget-mode="login"
+        data-o-anonymous
+      >
+        Login
       </button>
-      <button data-o-logout-link>Logout</button>
+      <button data-o-profile="1" data-mode="popup" data-o-authenticated>
+        Profile
+      </button>
+      <button data-o-logout-link data-o-authenticated>Logout</button>
     </div>
 
     <main>
       <!-- Get queen data from the server -->
       <div
-        gl-get="https://deploy-preview-25--galleon-tools.netlify.app/v1/outseta/me"
+        gl-get="https://galleon.tools/v1/outseta/me"
         gl-auth-token="Outseta.getAccessToken(), query:access_token"
       >
         <!-- Set the `textContent` to the response `greeting` -->
         <h1 gl-bind="greeting">Personlized Greeting</h1>
         <!-- Set the `textContent` to the response `description` -->
-        <p gl-bind-html="description">Personalized Description</p>
+        <p gl-bind-html="summary">Personalized Summary</p>
       </div>
     </main>
   </body>

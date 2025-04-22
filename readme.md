@@ -96,7 +96,7 @@ Coming...
 
 ### Authorization
 
-You can authenticate API requests using the `gl-auth-token` attribute with a concise format:
+You can authenticate API requests using the `gl-auth-token` attribute:
 
 ```html
 <div
@@ -108,7 +108,7 @@ You can authenticate API requests using the `gl-auth-token` attribute with a con
 The format is `source:key` where:
 
 - `source` can be `local` (localStorage), `session` (sessionStorage), `query` (URL query parameter), or omitted for global scope
-- `key` is the name of your token variable
+- `key` is the name of your token variable or function
 
 Examples:
 
@@ -120,9 +120,9 @@ Examples:
 
 > **Important**: When `gl-auth-token` is specified but no valid value is found, the request will be skipped. This helps prevent failed API requests to protected endpoints.
 
-#### Multiple Auth Sources
+#### Multiple Auth Token Sources
 
-You can specify multiple auth sources in a single `gl-auth-token` attribute using comma-separated values. The system will try each source in order and use the first one that has a valid value:
+You can specify multiple auth token sources in a single `gl-auth-token` attribute using comma-separated values. The system will try each source in order and use the first one that has a valid value:
 
 ```html
 <div
